@@ -22,13 +22,13 @@ async function handleSaveBlog() {
     let params = `cost=${cost}&&vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
             &&fPo=${fPo.value}&&fDate=${fDate.value}&&fVendor=${JSON.stringify(activeVendor)}&&fProducts=${JSON.stringify(productList)}`;
 
+    root.innerHTML = loader('primary', 'Saving invoice now..')
     var xml = new XMLHttpRequest();
     xml.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
-            // (this.responseText == 'true') ? root.innerHTML = alertMessage('success', 'Successfully added invoice') : root.innerHTML = alertMessage('danger', 'Error adding invoice, try again')
             let response = this.response;
             root.innerHTML = updateSavedBlog(response).html;
-            document.getElementById('productListGroup').innerHTML = updateSavedBlog(response).products
+            document.getElementById('productListGroup').innerHTML = updateSavedBlog(response).products;
         }
     }
     xml.open("POST", url, true);
@@ -105,11 +105,11 @@ function updateSavedBlog(data) {
               </div>
 
               <div class="job-address col-md-5 col-lg-7">
-                <h5 id="jobAddressBtn" class="mb-3 address">
+                <h5 id="jobAddressBtn" class="mb-2 address">
                   <img id="dropdownImg" src="public/assets/icons/menu-black.png" width="40" height="40">
                     Job address
                 </h5>
-                <h3>Invoice # <span id="invoiceNumber">0000${d[0].invoiceId}</span></h3>
+                <h4>Invoice # <span id="invoiceNumber">0000${d[0].invoiceId}</span></h4>
                 <h4>Total Due: $${d[0].cost} </h4>
 
                 <div class="job-address-formatted d-block" id="jobAddressFormated">
@@ -120,7 +120,7 @@ function updateSavedBlog(data) {
                     
                     <p class="p-0 m-0 fs-6" id="fAddress">${d[0].fAddress}</p>
                     <p class="p-0 m-0 fs-6" id="fCity">${d[0].fCity}, ${d[0].fState} ${d[0].fZip}</p>
-                    <img src="${d[0].fImg}" id="invoiceUploadImg" style="max-width:380px;" class="img-fluid">
+                    <img src="${d[0].fImg}" id="invoiceUploadImg" class="m-0 mt-3 img-thumbnail img-fluid" style="max-width:355px;">
                   </div>
                 </div>
 
@@ -136,7 +136,7 @@ function updateSavedBlog(data) {
 
 
                     <div class="modal-header">
-                    <h4 class="modal-title">Scope Image Upload id-${d[0].invoiceId}</h4>
+                    <h4 class="modal-title">Image Upload Id-${d[0].invoiceId}</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -151,14 +151,14 @@ function updateSavedBlog(data) {
 
                                    <input type="file" name="sampleFile" class="form-control" id="fileToUpload"/>
 
-                                   <input type="text" name="keyValue" value="img" class="fImg" id="keyValue"/>
+                                   <input type="text" hidden name="keyValue" value="img" class="fImg" id="keyValue"/>
 
-                                   <input type="text" name="invoiceId" value="${d[0].invoiceId}" class="form-control" id="invoiceId"/>
+                                   <input type="text" hidden name="invoiceId" value="${d[0].invoiceId}" class="form-control" id="invoiceId"/>
 
                                     <div class="modal-footer">
                                       
                                     <button onclick="handleAddImage(event, ${d[0].invoiceId})" 
-                                            type='button' value='Upload!' data-bs-dismiss="modal" class="btn btn-primary bm-btn-primary btn-small">Upload</button>
+                                            type='button' value='Upload!' data-bs-dismiss="modal" class="btn btn-primary ">Upload</button>
                                       
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     </div> 
