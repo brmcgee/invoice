@@ -37,11 +37,18 @@
                     </div>
 
                     <div class="job-btn-bar btn-group pt-0 d-flex justify-content-start" style="width:100%;">
-                      <button class="btn btn-dark " data-bs-toggle="modal" data-bs-target="#addItemModal" 
-                            type="submit">Add</button>
-                      <button class="btn btn-success" onclick='saveJob()' type="submit">Save</button>
-                      <button class="btn btn-danger" onclick='clearItemList()' type="submit">Clear</button>
-                      <button class="btn btn-dark" onclick='window.print()' type="submit">Print</button>
+                      <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addItemModal" type="button">
+                          <img src="public/assets/icons/add-black.png" alt="add" width="28" height="28" >
+                      </button>
+                      <button class="btn btn-light" onclick='saveJob()' type="button">
+                          <img src="public/assets/icons/save-black.png" alt="add" width="28" height="28">
+                      </button>
+                      <button class="btn btn-light" onclick='clearItemList()' type="button">
+                          <img src="public/assets/icons/delete-black.png" alt="add" width="28" height="28">
+                      </button>
+                      <button class="btn btn-light" onclick='window.print()' type="button">
+                          <img src="public/assets/icons/print-black.png" alt="add" width="28" height="28">
+                      </button>
                    </div>
 
                 </div>
@@ -93,7 +100,7 @@
 
                       <div class="col-sm-6">
                         <label for="jDate" class="form-label">Job Date</label>
-                        <input type="text" class="form-control" id="jDate" name="jDate" placeholder="" required="">
+                        <input type="date" class="form-control" id="jDate" name="jDate" placeholder="" required="">
                       </div>
 
                       <div class="col-sm-6">
@@ -122,10 +129,10 @@
                         <label for="state" class="form-label">State</label>
                         <select class="form-select" id="state" name="jState" required="">
                           <option value="">Choose...</option>
-                          <option>Pennsylvannia</option>
-                          <option>West Virginia</option>
-                          <option>Ohio</option>
-                          <option>Florida</option>
+                          <option>PA</option>
+                          <option>WV</option>
+                          <option>OH</option>
+                          <option>FL</option>
                         </select>
                       </div>
 

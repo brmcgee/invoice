@@ -8,6 +8,7 @@ function clearItemList(){
     el('#productListGroup').innerHTML = '';
     el('#dbString').value = '';
     el('#dbHtml').value = '';
+    el('#totalCost').innerHTML = '';
     productList = [];
     
 }
@@ -115,7 +116,7 @@ function handleItemAdd(){
     el('#item').value = ''; 
     el('#cost').innerHTML = ''; 
     el('#description').innerHTML = ''; 
-    el('#qty').innerHTML = '';
+    el('#qty').innerHTML = '1';
     listRoot.innerHTML += html;
 
 
