@@ -61,6 +61,10 @@ function updateSavedBlog(data) {
                       <button class="btn btn-light" onclick='window.print()' type="button">
                           <img src="public/assets/icons/print-black.png" alt="add" width="28" height="28">
                       </button>
+
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#invoiceModal">
+                            <img class="" src="public/assets/icons/upload-black.png" alt="" width="28">
+                        </button> 
                    </div>
 
                 </div>
@@ -116,6 +120,7 @@ function updateSavedBlog(data) {
                     
                     <p class="p-0 m-0 fs-6" id="fAddress">${d[0].fAddress}</p>
                     <p class="p-0 m-0 fs-6" id="fCity">${d[0].fCity}, ${d[0].fState} ${d[0].fZip}</p>
+                    <img src="${d[0].fImg}" id="invoiceUploadImg" style="max-width:380px;" class="img-fluid">
                   </div>
                 </div>
 
@@ -123,6 +128,50 @@ function updateSavedBlog(data) {
 
 
             </main>
+
+               <!-- add image modal  -->
+            <div class="modal" id="invoiceModal">
+              <div class="modal-dialog">
+                 <div class="modal-content">
+
+
+                    <div class="modal-header">
+                    <h4 class="modal-title">Scope Image Upload id-${d[0].invoiceId}</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+
+                       <div class="modal-body" id="invoiceModalBody">
+
+                          <form ref='uploadFormImg' 
+                                id='invoiceForm' 
+                                action='${pre}/upload-invoice' 
+                                method='POST' 
+                                encType="multipart/form-data">
+
+                                   <input type="file" name="sampleFile" class="form-control" id="fileToUpload"/>
+
+                                   <input type="text" name="keyValue" value="img" class="fImg" id="keyValue"/>
+
+                                   <input type="text" name="invoiceId" value="${d[0].invoiceId}" class="form-control" id="invoiceId"/>
+
+                                    <div class="modal-footer">
+                                      
+                                    <button onclick="handleAddImage(event, ${d[0].invoiceId})" 
+                                            type='button' value='Upload!' data-bs-dismiss="modal" class="btn btn-primary bm-btn-primary btn-small">Upload</button>
+                                      
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div> 
+                                    
+                                    
+                          </form>   
+
+                       </div>
+
+
+                 </div>
+              </div>
+              </div>
 
     
     `;
