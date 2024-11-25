@@ -18,8 +18,9 @@ async function handleSaveBlog() {
     let fPo = document.getElementById('po');
     let fDate = document.getElementById('jDate');
     let vendorId = document.getElementById('vendor');
+    let cost = Number(document.getElementById('totalCost').innerHTML);
 
-    let params = `vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
+    let params = `cost=${cost}&&vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
             &&fPo=${fPo.value}&&fDate=${fDate.value}&&fVendor=${JSON.stringify(activeVendor)}&&fProducts=${JSON.stringify(productList)}`;
 
     var xml = new XMLHttpRequest();
