@@ -94,7 +94,7 @@ const products = [
         'prodId' : 8,
         'item' : "Misc",
         'description' : 'Misc labor charge',
-        'cost' : 0,
+        'cost' : 1,
         'unit' : 'each'
     },
     {

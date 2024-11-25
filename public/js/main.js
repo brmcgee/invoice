@@ -10,20 +10,34 @@ function clearItemList(){
     el('#dbHtml').value = '';
     el('#totalCost').innerHTML = '';
     productList = [];
+    el('#totalProductLength').innerHTML = '0'
     
 }
 function showJobAddress(){
     let dropdownEl = el('#jobDropdown')
- 
+    let fJname = el('#fJname')
+        fJname.innerHTML = el('#jName').value;
+    let fPo = el('#fPo')
+        fPo.innerHTML = el('#po').value;
+    let fAddress = el('#fAddress');
+        fAddress.innerHTML = el('#jAddress').value;
+    let fDate = el('#fDate');
+        fDate.innerHTML = el('#jDate').value;
+    let fCity = el('#fCity');
+        fCity.innerHTML = el('#jCity').value + ', ' + el('#jState').value + ' ' + el('#jZip').value;
+   
+
     if (dropdownEl.style.display == 'none') {
         el('#dropdownImg').src = 'public/assets/icons/menu-open-black.png'
         dropdownEl.style.display = 'block';
+        el('#jobAddressFormated').style.display = 'none';
     } 
 
     else {
 
         el('#dropdownImg').src = 'public/assets/icons/menu-black.png'
         dropdownEl.style.display = 'none';
+        el('#jobAddressFormated').style.display = 'block';
     }
   
 }
@@ -50,6 +64,7 @@ function handleQty(){
     let cost = el('#cost').innerHTML;
     let newCost = qty * cost;
     el('#cost').innerHTML = newCost;
+
 }
 
 function removeItem(itemId) {
