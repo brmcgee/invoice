@@ -89,7 +89,7 @@ function updateSavedBlog(data) {
                     
                     
      html+= `
-            <div class="job-details col-md-7 col-lg-5 order-md-last">
+            <div class="job-details col-md-7 col-lg-6 order-md-last">
                 <h5 class="d-flex justify-content-between align-items-center mb-3">
                   <span class="bm-text-primary">Job Items</span>
                   <span class="badge bm-bg-primary rounded-pill" id="totalProductLength">${prods.length}</span>
@@ -104,7 +104,7 @@ function updateSavedBlog(data) {
 
               </div>
 
-              <div class="job-address col-md-5 col-lg-7">
+              <div class="job-address col-md-5 col-lg-6">
                 <h5 id="jobAddressBtn" class="mb-2 address">
                   <img id="dropdownImg" src="public/assets/icons/menu-black.png" width="40" height="40">
                     Job address
@@ -120,7 +120,7 @@ function updateSavedBlog(data) {
                     
                     <p class="p-0 m-0 fs-6" id="fAddress">${d[0].fAddress}</p>
                     <p class="p-0 m-0 fs-6" id="fCity">${d[0].fCity}, ${d[0].fState} ${d[0].fZip}</p>
-                    <img src="${d[0].fImg}" id="invoiceUploadImg" class="m-0 mt-3 img-thumbnail img-fluid" style="max-width:355px;">
+                    <img src="${d[0].fImg}" id="invoiceUploadImg" class="m-0 mt-3 img-thumbnail img-fluid" style="max-width:305px;">
                   </div>
                 </div>
 
