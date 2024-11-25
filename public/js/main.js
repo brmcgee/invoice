@@ -1,9 +1,12 @@
 let productList = [];
 let activeVendor = [];
+let pre = `http://localhost:5200`;
+// pre = `https://office.boxcar.site`;
 
 function el(target){
     return document.querySelector(target);
 }
+
 function clearItemList(){
     el('#productListGroup').innerHTML = '';
     el('#dbString').value = '';
@@ -162,12 +165,6 @@ function handleSubmitTo(){
         'phone' : `${vendor[vendorId].phone}`
     }
     activeVendor.push(obj)
-}
-
-function saveJob(){
-    let el = document.getElementById('dbHtml').value;
-    let value = (el.slice(0, el.length-1)) + ']';
-    document.getElementById('dbHtml').value = value;
 }
 
 

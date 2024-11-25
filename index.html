@@ -54,7 +54,6 @@
                 </div>
 
 
-
                 <div class="job-logo col-5 text-center">
                   <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
                   <h2>Invoice</h2>
@@ -86,7 +85,7 @@
                 </h5>
 
                 <div class="job-address-formatted" id="jobAddressFormated">
-                  <div class="container"  style="min-height: 115px;">
+                  <div class="container">
                     <h5 class="mb-0" id="fJname"></h5>
                     <h5 class="mb-0" id="fDate"></h5>
                     <p class="p-0 m-0 fs-6" id="fPo"></p>
@@ -214,7 +213,7 @@
             
             <textarea hidden rows=10 cols=40 name="dbString" id="dbString" class="border-0 bg-transparent"></textarea>
             <small hidden>JSON to be stored in db</small>
-            <textarea  hidden rows=10 cols=40 name="dbHtml" id="dbHtml" class="border-0 bg-transparent">[</textarea>
+            <textarea hidden  rows=10 cols=40 name="dbHtml" id="dbHtml" class="border-0 bg-transparent">[</textarea>
 
           </div>
 
@@ -225,9 +224,10 @@
   </head>
   <body>
 
-
+    <script src="public/js/utility.js"></script>
     <script src="public/js/data.js"></script>
     <script src="public/js/main.js"></script>
+    <script src="public/js/addInvoice.js"></script>
   </body>
 </html>
 
