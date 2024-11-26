@@ -42,12 +42,15 @@ function htmlFetchAllInvoice(data){
              
         </div>
         <div class="d-flex flex-column">
-            <span class="badge text-bg-dark">$${data.cost}.00</span>
-            <div class="ms-5 ps-3 mt-3">
-                <span>${getPaidStatus(data.status)}</span>
+            <span class="badge text-dark float-end m-0">${data.fDate.slice(0, 10)}</span>
+            <div class="ms-1 mt-3">
+                
                 <button type="button" class="btn btn-light" onclick="fetchInvoiceById(${data.invoiceId})">
-                    <img class="" src="public/assets/icons/file-open-black.png" alt="" width="28">
+                        <img class="" src="public/assets/icons/invoice.png" alt="" width="25" height="25">
+
                 </button> 
+
+                <span>${getPaidStatus(data.status)}</span>
             </div>
         </div>
     </li>

@@ -14,7 +14,7 @@ try {
         let html = `<div class="mx-auto container-md" style="width:auto;">`;
        
         html += htmlFetchInvoiceById(data);
-root.innerHTML = html;
+        root.innerHTML = html;
 
 
     //     data.forEach( d => {
@@ -68,6 +68,14 @@ function htmlFetchInvoiceById(d) {
                         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#invoiceModal">
                             <img class="" src="public/assets/icons/upload-black.png" alt="" width="28">
                         </button> 
+
+                        <button type="button" onclick="handleEmail()" class="btn btn-light" data-bs-toggle="modal">
+                            <img class="" src="public/assets/icons/mail-black.png" alt="" width="28">
+                        </button> 
+
+                        <button type="button" onclick="markInvoicePaid()" class="btn btn-light">
+                            <img class="" src="public/assets/icons/paid-black.png" alt="" width="28">
+                        </button>                         
                    </div>
 
                 </div>
@@ -75,7 +83,14 @@ function htmlFetchInvoiceById(d) {
 
                 <div class="job-logo col-5 text-center">
                 <div id="imgLoading"></div>
-                  <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
+                  <div id="logoContainer" class="d-flex justifiy-content-center">
+                    <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="paid" width="72" height="57">
+                  
+                      <span class="text-danger small">
+                          ${getPaidStatus(d[0].status)}
+                      </span>
+                  </div>
+                
                   <h2>Invoice</h2>
                 </div>
 
@@ -184,4 +199,20 @@ prod.forEach(p => {
 return html;
 
 
+}
+
+function markInvoicePaid () {
+  let logoContainer = document.getElementById('logoContainer');
+  logoContainer.innerHTML = `                  
+            <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
+            
+            <span class="text-success small pe-2">
+              <img class="d-block mx-auto mb-1" src="public/assets/icons/paid-green.png" alt="BRM" width="50" height="50">
+              </span>`;
+            
+
+}
+function handleEmail(){
+
+  alert('need to handle email')
 }

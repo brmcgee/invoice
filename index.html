@@ -23,7 +23,7 @@
               <img src="public/assets/icons/contract-black.png" alt="add" width="22" height="22" > Invoices
             </button>
             <button class="btn btn-transparent" type="button" 
-                onclick="handleCreateNewInvoice(), populateProductOptions(), populateVendorOptions() ">
+                onclick="location.reload()">
               <img src="public/assets/icons/edit-black.png" alt="add" width="22" height="22" > New
             </button>
             
@@ -67,13 +67,23 @@
 
 
                 <div class="job-logo col-5 text-center">
-                  <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
-                  <h2>Invoice</h2>
+                  <div id="imgLoading"></div>
+                    <div id="logoContainer" class="d-flex justifiy-content-center">
+                      <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="paid" width="72" height="57">
+                
+                        <span class="text-danger small">
+                          <img class="img-fluid mx-auto ms-2" class="" src="public/assets/icons/payment-due.png" alt="due" width="50" height="50">
+                        </span>
+                    </div>
+                  
+                    <h2>Invoice</h2>
+                  </div>
+  
                 </div>
 
               </div>
 
-              <div class="job-details col-md-7 col-lg-5 order-md-last">
+              <div class="job-details col-md-7 col-lg-5 order-md-last px-1">
                 <h5 class="d-flex justify-content-between align-items-center mb-3">
                   <span class="bm-text-primary">Job Items</span>
                   <span class="badge bm-bg-primary rounded-pill" id="totalProductLength">0</span>
@@ -90,7 +100,7 @@
 
               </div>
 
-              <div class="job-address col-md-5 col-lg-7">
+              <div class="job-address col-md-5 col-lg-7 px-1">
                 <h5 id="jobAddressBtn" class="mb-3 address" onclick="showJobAddress()">
                   <img id="dropdownImg" src="public/assets/icons/menu-black.png" width="40" height="40">
                     Job address

@@ -18,21 +18,51 @@ function loader(type, message) {
 function viewBtn(){
     return `
         <button type="button" class="btn btn-light">
-            <img class="" src="public/assets/icons/file-open-black.png" alt="" width="28">
+            <img class="" src="public/assets/icons/file-open-black.png" alt="" width="25">
+        </button> 
+    
+    `;
+}
+function invoiceBtn(){
+    return `
+       
+            <img class="" src="public/assets/icons/invoice.png" alt="" width="30" height="30">
+       
+    
+    `;
+}
+function paidBtn(){
+    return `
+        <button type="button" class="btn btn-light">
+            <img class="" src="public/assets/icons/paid-green.png" alt="" width="30" height="30">
+        </button> 
+    
+    `;
+}
+function dueBtn(){
+    return `
+        <button type="button" class="btn btn-light">
+            <img class="" src="public/assets/icons/payment-due.png" alt="" width="30" height="30">
         </button> 
     
     `;
 }
 
 function getPaidStatus(status){
-    
+    console.log(status)
+    if (status == 'unpaid') {
+        return ` ${dueBtn()}`;
+    } 
     if (status == 'paid') {
-        return ` <img class="img-fluid me-1" src="public/assets/icons/paid-green.png"
-                     alt="" width="40" height="40">
-               `;
-    } else {
-        return ` <img class="img-fluid" src="public/assets/icons/payment-due.jpg"
-                     alt="" width="55" height="55">
-               `;
+        return ` ${paidBtn()}`;
     }
+}
+
+function invoiceBtn(){
+    return `
+        <button type="button" class="btn btn-light">
+            <img class="" src="public/assets/icons/invoice.png" alt="" width="25" height="25">
+        </button> 
+    
+    `;
 }
