@@ -42,7 +42,18 @@ const vendor = [
         'phone' : '',
         'email' : 'brm_dev@outlook.com',
         'img' : ''
-    }  
+    },
+    {
+        'vendorId' : 4,
+        'name' : 'Door America',
+        'address' : '123 Main St',
+        'city' : 'Pittsburgh',
+        'state' : 'PA',
+        'zip' : '16797',
+        'phone' : '412-523-9536',
+        'email' : 'brm_dev@outlook.com',
+        'img' : ''
+    }   
 ];
 const products = [
     {

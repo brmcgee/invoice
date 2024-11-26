@@ -1,7 +1,7 @@
 let productList = [];
 let activeVendor = [];
 let pre = `http://localhost:5200`;
-pre = `https://office.boxcar.site`;
+pre = `https://office.boxcar.site`; 
 
 function el(target){
     return document.querySelector(target);
@@ -64,7 +64,6 @@ function populateVendorOptions(){
     let vendorSelect = document.getElementById('vendor');
     let html = '<option>Choose..</option>';
     vendor.forEach(v => {
-        console.log(v.name)
         html += `<option value="${v.vendorId}">${v.name}</option>`
     })
     vendorSelect.innerHTML += html;
