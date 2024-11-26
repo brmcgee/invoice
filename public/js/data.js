@@ -23,12 +23,12 @@ const vendor = [
     },
     {
         'vendorId' : 2,
-        'name' : 'House',
-        'address' : '',
-        'city' : '',
-        'state' : '',
-        'zip' : '',
-        'phone' : '',
+        'name' : 'US Garage Door',
+        'address' : '1619 Federal Hwy',
+        'city' : 'Pittsbrugh',
+        'state' : 'PA',
+        'zip' : '16330',
+        'phone' : '412-963-7854',
         'email' : 'brm_dev@outlook.com',
         'img' : ''
     },

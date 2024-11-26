@@ -49,7 +49,7 @@ function dueBtn(){
 }
 
 function getPaidStatus(status){
-    console.log(status)
+
     if (status == 'unpaid') {
         return ` ${dueBtn()}`;
     } 

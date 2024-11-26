@@ -22,6 +22,11 @@ async function handleSaveBlog() {
     let params = `email=${email}&&cost=${cost}&&vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
             &&fPo=${fPo.value}&&fDate=${fDate.value}&&fVendor=${JSON.stringify(activeVendor)}&&fProducts=${JSON.stringify(productList)}`;
 
+    if (fDate.value == '') { alert('Enter job date!'); return;}
+    if (fJname.value == '') { alert('Enter job name!'); return;}
+    if (vendorId.value == 'Choose..') { alert('Select Vendor!'); return;}
+    if (fPo.value == '') { alert('Enter job PO Number!'); return;}
+
     root.innerHTML = loader('primary', 'Saving invoice now..')
     var xml = new XMLHttpRequest();
     xml.onreadystatechange = function(){

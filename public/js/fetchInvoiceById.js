@@ -56,6 +56,7 @@ function htmlFetchInvoiceById(d) {
                       <p class="p-0 m-0" id="vName">${vendor[d[0].vendorId].name}</p>
                       <p class="p-0 m-0 small" id="vAddress">${vendor[d[0].vendorId].address}</p>
                       <p class="p-0 m-0 small" id="vCity">${vendor[d[0].vendorId].city}, ${vendor[d[0].vendorId].state} ${vendor[d[0].vendorId].zip}</p>
+                      <p class="p-0 m-0 small" id="vEmail">${vendor[d[0].vendorId].email}</p>
                       <p class="p-0 m-0 small">Phone: <span id="vPhone"></span></p>
                     </div>
 
@@ -128,7 +129,7 @@ prod.forEach(p => {
                   <img id="dropdownImg" src="public/assets/icons/menu-black.png" width="40" height="40">
                     Job address
                 </h5>
-                <h4>Invoice # <span id="invoiceNumber">0000${d[0].invoiceId}</span></h4>
+                <h4>Invoice # <span id="invoiceNumber">${d[0].invoiceId}</span></h4>
                 <h4>Total Due: $${d[0].cost} </h4>
 
                 <div class="job-address-formatted d-block" id="jobAddressFormated">
@@ -213,6 +214,37 @@ function markInvoicePaid () {
 
 }
 function handleEmail(){
+  
+  let vEmail = document.getElementById('vEmail');
+  let invoiceId = document.getElementById('invoiceNumber');
+  let vName = document.getElementById('vName');
+  let vJname = document.getElementById('fJname');
 
-  alert('need to handle email')
+
+  let params = `vName=${vName.innerHTML}&&vJname=${vJname.innerHTML}&&vEmail=${vEmail.innerHTML}&&invoiceId=${invoiceId.innerHTML}`;
+
+  let url = `${pre}/email-invoice`
+  root.innerHTML = loader('primary', 'Emailing invoice now..')
+
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+      let response = this.response;
+      root.innerHTML = response;
+
+    }
+  }
+  xml.open("POST", url, true);
+  xml.setRequestHeader("Content-type", 'application/x-www-form-urlencoded')
+  xml.send(params);
+
+
 }
+
+// <div class="container"  style="min-height: 115px;">
+// <h5 class="mb-0">Submitted to:</h5>
+// <p class="p-0 m-0" id="vName">${vendor[d[0].vendorId].name}</p>
+// <p class="p-0 m-0 small" id="vAddress">${vendor[d[0].vendorId].address}</p>
+// <p class="p-0 m-0 small" id="vCity">${vendor[d[0].vendorId].city}, ${vendor[d[0].vendorId].state} ${vendor[d[0].vendorId].zip}</p>
+// <p class="p-0 m-0 small">Phone: <span id="vPhone"></span></p>
+// </div>

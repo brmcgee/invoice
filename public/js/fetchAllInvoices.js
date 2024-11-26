@@ -34,7 +34,7 @@ function htmlFetchAllInvoice(data){
     html +=`
     <li class="mt-2 g-2 pb-3 p-3 list-group-item d-flex justify-content-between align-items-start border border-dark rounded " style="width:auto;">
         <div class="ms-2 me-auto">
-            <div class="fw-bold">${vendor[0].name}</div>
+            <div class="fw-bold">${vendor[data.vendorId].name}</div>
             
         <div class="">${data.fJname}</div>
              <p class="small m-0"> ${data.fAddress} <p>

@@ -54,8 +54,10 @@ body {
     justify-content: center;
 }
 .bm-text-primary {
+    color: #ecb8b8;
     color: rgb(12, 54, 194);
 }
+
 .bm-bg-primary{
     background-color: rgb(12, 54, 194);
 }
