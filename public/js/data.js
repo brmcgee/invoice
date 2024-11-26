@@ -51,7 +51,7 @@ const vendor = [
         'state' : 'PA',
         'zip' : '16797',
         'phone' : '412-523-9536',
-        'email' : 'brm_dev@outlook.com',
+        'email' : 'brianmcgee@live.com',
         'img' : ''
     }   
 ];
