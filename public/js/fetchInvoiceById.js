@@ -11,7 +11,7 @@ try {
     root.innerHTML = loader('info', `Fetching invoice ${invoiceId}..`);
     try {
         let data = await response.json();
-        let html = `<div class="mx-auto" style="width:29rem;">`;
+        let html = `<div class="mx-auto container-md" style="width:auto;">`;
        
         html += htmlFetchInvoiceById(data);
 root.innerHTML = html;
@@ -92,11 +92,12 @@ prod.forEach(p => {
 
              
      html+= `
-            <div class="job-details col-md-7 col-lg-6 order-md-last">
+            <div class="job-details col-md-12 order-md-last">
                 <h5 class="d-flex justify-content-between align-items-center mb-3">
                   <span class="bm-text-primary">Job Items</span>
                   <span class="badge bm-bg-primary rounded-pill" id="totalProductLength"></span>
                 </h5>
+
                 <ul class="list-group mb-3 list-unstyled bg-white " id="productListGroup">
                 </ul>
 

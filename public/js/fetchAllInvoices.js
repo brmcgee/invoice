@@ -11,7 +11,7 @@ async function handleFetchAllInvoices() {
         root.innerHTML = loader('info', 'Fetching invoices..');
         try {
             let data = await response.json();
-            let html = `<div class="mx-auto" style="width:29rem;">`;
+            let html = `<div class="mx-auto container-md" style="width:100%;">`;
             data.forEach( d => {
                 html += htmlFetchAllInvoice(d);
             });
@@ -32,13 +32,13 @@ function htmlFetchAllInvoice(data){
 
     let html =``;
     html +=`
-    <li class="bm-border mt-2 g-2 pb-3 p-3 list-group-item d-flex justify-content-between align-items-start">
+    <li class="mt-2 g-2 pb-3 p-3 list-group-item d-flex justify-content-between align-items-start border border-dark rounded " style="width:auto;">
         <div class="ms-2 me-auto">
             <div class="fw-bold">${vendor[0].name}</div>
             
         <div class="">${data.fJname}</div>
-             ${data.fAddress} <br>
-             ${data.fCity}, ${data.fState} ${data.fZip}
+             <p class="small m-0"> ${data.fAddress} <p>
+             <span class="small m-0">${data.fCity}, ${data.fState} ${data.fZip}</span>
              
         </div>
         <div class="d-flex flex-column">
