@@ -18,8 +18,8 @@ async function handleSaveBlog() {
     let fDate = document.getElementById('jDate');
     let vendorId = document.getElementById('vendor');
     let cost = Number(document.getElementById('totalCost').innerHTML);
-
-    let params = `cost=${cost}&&vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
+    let email = document.getElementById('vEmail').innerHTML;
+    let params = `email=${email}&&cost=${cost}&&vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
             &&fPo=${fPo.value}&&fDate=${fDate.value}&&fVendor=${JSON.stringify(activeVendor)}&&fProducts=${JSON.stringify(productList)}`;
 
     root.innerHTML = loader('primary', 'Saving invoice now..')

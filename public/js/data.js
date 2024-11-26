@@ -7,7 +7,7 @@ const vendor = [
         'state' : 'PA',
         'zip' : '15137',
         'phone' : '412-678-2929',
-        'email' : 'slackoverheaddoors@comcast.net',
+        'email' : 'brianrmcgee@gmail.com',
         'img' : ''
     },
     {

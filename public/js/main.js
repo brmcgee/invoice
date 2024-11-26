@@ -17,6 +17,7 @@ function clearItemList(){
     
 }
 function showJobAddress(){
+
     let dropdownEl = el('#jobDropdown')
     let fJname = el('#fJname')
         fJname.innerHTML = el('#jName').value;
@@ -165,6 +166,7 @@ function handleSubmitTo(){
     el('#vAddress').innerHTML = `${vendor[vendorId].address}`;
     el('#vCity').innerHTML = `${vendor[vendorId].city}, ${vendor[vendorId].state} ${vendor[vendorId].zip}`
     el('#vPhone').innerHTML = `${vendor[vendorId].phone}`;
+    el('#vEmail').innerHTML = `${vendor[vendorId].email}`;
     let obj = {
         'id' : vendorId,
         'name' : vendor[vendorId].name,
@@ -174,7 +176,6 @@ function handleSubmitTo(){
     }
     activeVendor.push(obj)
 }
-
 
 populateProductOptions()
 
