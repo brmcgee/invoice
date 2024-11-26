@@ -231,6 +231,7 @@ function handleEmail(){
     if (this.readyState == 4 && this.status == 200) {
       let response = this.response;
       root.innerHTML = response;
+      root.innerHTML += alertMessage('success', 'Email was successfully sent!') 
 
     }
   }

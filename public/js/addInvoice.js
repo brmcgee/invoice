@@ -69,7 +69,8 @@ function updateSavedBlog(data) {
 
                         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#invoiceModal">
                             <img class="" src="public/assets/icons/upload-black.png" alt="" width="28">
-                        </button> 
+                        </button>
+                        
                    </div>
 
                 </div>
