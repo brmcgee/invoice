@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Invoice - BM</title>
-
-      <link rel="icon" type="image/x-icon" href="favico.ico">
-      <link rel="stylesheet" href="https://office.boxcar.site/public/css/fonts.css">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-      
-      
-      <link rel="stylesheet" href="public/css/style.css">
+function createNewInvoice(){
+    return `
     
-
-      <div class="app">
-
-          <div id="menu" class="menu no-print">
-            <button class="btn btn-transparent" type="button" onclick="fetchAllInvoices()">
-              <img src="public/assets/icons/contract-black.png" alt="add" width="22" height="22" > Invoices
-            </button>
-            <button class="btn btn-transparent" type="button" 
-                onclick="handleCreateNewInvoice(), populateProductOptions(), populateVendorOptions() ">
-              <img src="public/assets/icons/edit-black.png" alt="add" width="22" height="22" > New
-            </button>
-
-          </div>
-          <div id="root" class="root" >
-          
-
           <div class="invoice-- container-xl py-2">
 
             <main class="job-card row g-1">
@@ -225,23 +196,21 @@
             <small hidden>JSON to be stored in db</small>
             <textarea hidden  rows=10 cols=40 name="dbHtml" id="dbHtml" class="border-0 bg-transparent">[</textarea>
 
-          </div>
+          </div>    
+    
+    `;
+}
 
+function handleCreateNewInvoice(){
+    document.getElementById('root').innerHTML = createNewInvoice();
+}
 
-        </div>
-      </div>
-
-  </head>
-  <body>
-
-    <script src="public/js/utility.js"></script>
-    <script src="public/js/data.js"></script>
-    <script src="public/js/main.js"></script>
-    <script src="public/js/addInvoice.js"></script>
-    <script src="public/js/handleAddImage.js"></script>
-    <script src="public/js/createNewInvoice.js"></script>
-  </body>
-</html>
-
-
-
+function nextStep(){
+    let vendorSelect = document.getElementById('vendor');
+    let html = '<option>Choose..</option>';
+    vendor.forEach(v => {
+        console.log(v.name)
+        html += `<option value="${v.vendorId}">${v.name}</option>`
+    })
+    return vendorSelect.innerHTML += html;
+}

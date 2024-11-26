@@ -23,8 +23,19 @@ const vendor = [
     },
     {
         'vendorId' : 2,
-        'name' : '',
+        'name' : 'House',
         'address' : '',
+        'city' : '',
+        'state' : '',
+        'zip' : '',
+        'phone' : '',
+        'email' : 'brm_dev@outlook.com',
+        'img' : ''
+    },
+    {
+        'vendorId' : 3,
+        'name' : 'Attn',
+        'address' : 'Address',
         'city' : '',
         'state' : '',
         'zip' : '',

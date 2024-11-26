@@ -26,21 +26,31 @@ body {
     /* font-family: "Host Grotesk", sans-serif; */
 
 }
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+
+    }
+}
 .app {
     min-width: 350px;
     max-width: 900px;
     height: 100vh;
     overflow-y: auto;
     border: 1px solid #b9b9b9;
-    background-color: rgb(228, 228, 227);
+    background-color: rgb(247, 246, 246);
     padding: 0px;
     margin: auto;
 }
 .menu {
     width: 100%;
     height: 5vh;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(226, 226, 226);
     margin: auto;
+    display: flex;
+    justify-content: center;
 }
 .bm-text-primary {
     color: rgb(12, 54, 194);
@@ -48,9 +58,9 @@ body {
 .bm-bg-primary{
     background-color: rgb(12, 54, 194);
 }
-.menu:hover{
-    background-color: #f7dddd;
-   
+.bm-border {
+    border-radius: 5px;
+    border: 3px solid rgb(124, 109, 109);
 }
 .root {
     width: 100%;
@@ -69,6 +79,7 @@ body {
     border: 3px solid rgb(124, 109, 109);
     background-color: rgb(250, 250, 250);
 }
+
 .form-label {
     padding: 0px;
     margin: 0;

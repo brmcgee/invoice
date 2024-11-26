@@ -11,7 +11,7 @@ function clearItemList(){
     el('#productListGroup').innerHTML = '';
     el('#dbString').value = '';
     el('#dbHtml').value = '';
-    el('#totalCost').innerHTML = '';
+    el('#totalCost').innerHTML = '0';
     productList = [];
     el('#totalProductLength').innerHTML = '0'
     
@@ -60,7 +60,16 @@ function populateProductOptions(){
     })
     selectItem.innerHTML += html;
 }
-
+function populateVendorOptions(){
+    let vendorSelect = document.getElementById('vendor');
+    let html = '<option>Choose..</option>';
+    vendor.forEach(v => {
+        console.log(v.name)
+        html += `<option value="${v.vendorId}">${v.name}</option>`
+    })
+    vendorSelect.innerHTML += html;
+}
+populateVendorOptions()
 function handleQty(){
     populateProduct()
     let qty = el('#qty').innerHTML;
@@ -93,8 +102,8 @@ let c = 0;
 function htmlProductItem(d){
     let html = '';
     html += `
-    <li id="product${c}" class="product list-unstyled row rounded border px-0 mx-0">
-        <div class="p-2">
+    <li id="product${c}" class="product list-unstyled row mb-1 px-0 mx-0 bm-border">
+        <div class="p-1 px-2">
             <h6 class="my-0">${d.item}
    
             </h6>

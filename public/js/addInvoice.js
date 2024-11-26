@@ -56,7 +56,7 @@ function updateSavedBlog(data) {
                       <p class="p-0 m-0 small">Phone: <span id="vPhone"></span></p>
                     </div>
 
-                    <div class="job-btn-bar btn-group pt-0 d-flex justify-content-start" style="width:100%;">
+                    <div class="job-btn-bar btn-group no-print pt-0 d-flex justify-content-start" style="width:100%;">
                  
                       <button class="btn btn-light" onclick='window.print()' type="button">
                           <img src="public/assets/icons/print-black.png" alt="add" width="28" height="28">
@@ -71,6 +71,7 @@ function updateSavedBlog(data) {
 
 
                 <div class="job-logo col-5 text-center">
+                <div id="imgLoading"></div>
                   <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
                   <h2>Invoice</h2>
                 </div>
