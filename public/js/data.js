@@ -1,24 +1,24 @@
 const vendor = [
     {
         'vendorId' : 0,
-        'name' : 'Slack Overhead Doors',
-        'address' : '455 E Pittsburgh McKeesport Blvd',
-        'city' : 'North Versailles',
+        'name' : 'Web Overhead Doors',
+        'address' : '455 Franklin McKeesport Blvd',
+        'city' : 'Pittsburgh',
         'state' : 'PA',
         'zip' : '15137',
-        'phone' : '412-678-2929',
-        'email' : 'brianrmcgee@gmail.com',
+        'phone' : '412-400-2929',
+        'email' : 'brianmcgee@gmail.com',
         'img' : ''
     },
     {
         'vendorId' : 1,
         'name' : 'Brian McGee',
-        'address' : 'PO Box 66',
-        'city' : 'Hannstown',
+        'address' : '123 Hank St',
+        'city' : 'Miller',
         'state' : 'PA',
         'zip' : '15635',
-        'phone' : '724-787-3758',
-        'email' : 'brianrmcgee@gmail.com',
+        'phone' : '724-787-2366',
+        'email' : 'brianmcgee@gmail.com',
         'img' : ''
     },
     {
@@ -29,7 +29,7 @@ const vendor = [
         'state' : 'PA',
         'zip' : '16330',
         'phone' : '412-963-7854',
-        'email' : 'brm_dev@outlook.com',
+        'email' : 'brianmcgee@outlook.com',
         'img' : ''
     },
     {
@@ -40,7 +40,7 @@ const vendor = [
         'state' : '',
         'zip' : '',
         'phone' : '',
-        'email' : 'brm_dev@outlook.com',
+        'email' : 'brianmcgee@outlook.com',
         'img' : ''
     },
     {
@@ -60,21 +60,21 @@ const products = [
         'prodId' : 0,
         'item' : "Residential opener",
         'description' : 'opener install only',
-        'cost' : 80,
+        'cost' : 100,
         'unit' : 'each'
     },
     {
         'prodId' : 1,
         'item' : "Double 12-14ft door",
         'description' : 'door install only',
-        'cost' : 315,
+        'cost' : 250,
         'unit' : 'each'
     },
     {
         'prodId' : 2,
         'item' : "Double 14-16ft door",
         'description' : 'door install only',
-        'cost' : 340,
+        'cost' : 500,
         'unit' : 'each'
     },
     {
@@ -166,13 +166,6 @@ const products = [
         'item' : "Single Insulated 8-10",
         'description' : '8ft - install- insulated',
         'cost' : 230,
-        'unit' : 'each'
-    },
-    {
-        'prodId' : 16,
-        'item' : "356 Musick St",
-        'description' : 'Mike S Rent',
-        'cost' : 800,
         'unit' : 'each'
     }
 ];
