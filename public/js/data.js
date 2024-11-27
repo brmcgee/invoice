@@ -7,18 +7,18 @@ const vendor = [
         'state' : 'PA',
         'zip' : '15137',
         'phone' : '412-400-2929',
-        'email' : 'brianmcgee@gmail.com',
+        'email' : 'frangoodi@gmail.com',
         'img' : ''
     },
     {
         'vendorId' : 1,
-        'name' : 'Brian McGee',
+        'name' : 'Door World PGH',
         'address' : '123 Hank St',
         'city' : 'Miller',
         'state' : 'PA',
         'zip' : '15635',
         'phone' : '724-787-2366',
-        'email' : 'brianmcgee@gmail.com',
+        'email' : 'frangoodi@gmail.com',
         'img' : ''
     },
     {
@@ -29,7 +29,7 @@ const vendor = [
         'state' : 'PA',
         'zip' : '16330',
         'phone' : '412-963-7854',
-        'email' : 'brianmcgee@outlook.com',
+        'email' : 'frangoodi@outlook.com',
         'img' : ''
     },
     {
@@ -40,7 +40,7 @@ const vendor = [
         'state' : '',
         'zip' : '',
         'phone' : '',
-        'email' : 'brianmcgee@outlook.com',
+        'email' : 'frangoodi@outlook.com',
         'img' : ''
     },
     {
@@ -51,7 +51,7 @@ const vendor = [
         'state' : 'PA',
         'zip' : '16797',
         'phone' : '412-523-9536',
-        'email' : 'brianmcgee@live.com',
+        'email' : 'frangoodi@live.com',
         'img' : ''
     }   
 ];
