@@ -17,18 +17,6 @@ try {
         root.innerHTML = html;
 
 
-    //     data.forEach( d => {
-    //         html += htmlFetchAllInvoice(d);
-    //     });
-    //     html += `</div>`
-    //    root.innerHTML = html;
-    // let result = updateSavedBlog(response)
-
-    // root.innerHTML = result.html;
-    // document.getElementById('productListGroup').innerHTML = updateSavedBlog(response).products;
-
-       
-
     } catch (parseError) {
         root.innerHTML = loader('warning', parseError)
     }
@@ -38,9 +26,9 @@ try {
 }
 }
 
-
+let idata = [];
 function htmlFetchInvoiceById(d) {
-
+    idata = d[0];
     let html = '<div class="job-header py-2  row">'
     html += `
     
@@ -74,13 +62,17 @@ function htmlFetchInvoiceById(d) {
                             <img class="" src="public/assets/icons/mail-black.png" alt="" width="28">
                         </button> 
 
-                        <button type="button" onclick="markInvoicePaid()" class="btn btn-light">
+                        <button type="button" onclick="generatePDF()" class="btn btn-light">
+                            <img class="" src="public/assets/icons/pdf-black.png" alt="" width="28">
+                        </button>
+
+                        <button type="button" onclick="markInvoicePaid(${d[0].invoiceId})" class="btn btn-light">
                             <img class="" src="public/assets/icons/paid-black.png" alt="" width="28">
                         </button>                         
                    </div>
 
                 </div>
-
+                <img id="iImg" src="${d[0].fImg}" width="100" style="display:none;">
 
                 <div class="job-logo col-5 text-center">
                 <div id="imgLoading"></div>
@@ -131,6 +123,9 @@ prod.forEach(p => {
                 </h5>
                 <h4>Invoice # <span id="invoiceNumber">${d[0].invoiceId}</span></h4>
                 <h4>Total Due: $${d[0].cost} </h4>
+               
+               
+                <p id="isPaid" class="d-none">${d[0].status}</p>
 
                 <div class="job-address-formatted d-block" id="jobAddressFormated">
                   <div class="container">
@@ -202,15 +197,55 @@ return html;
 
 }
 
-function markInvoicePaid () {
+function markInvoicePaid (invoiceId) {
   let logoContainer = document.getElementById('logoContainer');
-  logoContainer.innerHTML = `                  
-            <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
-            
-            <span class="text-success small pe-2">
-              <img class="d-block mx-auto mb-1" src="public/assets/icons/paid-green.png" alt="BRM" width="50" height="50">
-              </span>`;
-            
+  let isPaid = document.getElementById('isPaid');
+  let html = '';
+  let isPaidHtml = '';
+
+
+  if (isPaid.innerHTML == 'paid') {
+      html = `                  
+              <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
+              
+              <span class="text-success small pe-2">
+                <img class="d-block mx-auto mb-1" src="public/assets/icons/payment-due.png" alt="BRM" width="50" height="50">
+                </span>`;
+      isPaidHtml = 'unpaid';
+
+  } 
+  
+  if (isPaid.innerHTML == 'unpaid') {
+      html = `                  
+          <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="BRM" width="72" height="57">
+          
+          <span class="text-success small pe-2">
+            <img class="d-block mx-auto mb-1" src="public/assets/icons/paid-green.png" alt="BRM" width="50" height="50">
+            </span>`;
+      isPaidHtml = 'paid';
+      
+  }
+  
+  isPaid.innerHTML = isPaidHtml;
+  logoContainer.innerHTML = html; 
+
+  let url = `${pre}/update-invoice-status`;
+  let params = `status=${isPaidHtml}&&invoiceId=${invoiceId}`;
+
+  // root.innerHTML = loader('primary', 'Updating status now..')
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
+          let response = this.response;
+          root.innerHTML = response;
+      }
+  }
+  xml.open("POST", url, true);
+  xml.setRequestHeader("Content-type", 'application/x-www-form-urlencoded')
+  xml.send(params);
+  
+  
+           
 
 }
 function handleEmail(){
@@ -219,6 +254,7 @@ function handleEmail(){
   let invoiceId = document.getElementById('invoiceNumber');
   let vName = document.getElementById('vName');
   let vJname = document.getElementById('fJname');
+
 
 
   let params = `vName=${vName.innerHTML}&&vJname=${vJname.innerHTML}&&vEmail=${vEmail.innerHTML}&&invoiceId=${invoiceId.innerHTML}`;

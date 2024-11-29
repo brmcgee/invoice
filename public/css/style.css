@@ -47,14 +47,16 @@ body {
 }
 .menu {
     width: 100%;
-    height: 5vh;
-    background-color: rgb(247, 246, 246);
+    height: 6vh;
+    background-color: rgb(231, 231, 231);
     margin: auto;
     display: flex;
     justify-content: center;
 }
 .bm-text-primary {
     color: #ecb8b8;
+    color: #991111;
+    color: #0a0a0a;
     color: rgb(12, 54, 194);
 }
 
@@ -67,7 +69,7 @@ body {
 }
 .root {
     width: 100%;
-    height: 94vh;
+    height: 93vh;
     background-color: rgb(247, 246, 246);
     margin: auto;
 }

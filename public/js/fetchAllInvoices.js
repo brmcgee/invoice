@@ -47,7 +47,6 @@ function htmlFetchAllInvoice(data){
                 
                 <button type="button" class="btn btn-light" onclick="fetchInvoiceById(${data.invoiceId})">
                         <img class="" src="public/assets/icons/invoice.png" alt="" width="25" height="25">
-
                 </button> 
 
                 <span>${getPaidStatus(data.status)}</span>
