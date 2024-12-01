@@ -2,7 +2,6 @@ let productList = [];
 let activeVendor = [];
 
 let pre = `http://localhost:5200`;
-pre = `https://office.boxcar.site`;
 
 
 function el(target){
