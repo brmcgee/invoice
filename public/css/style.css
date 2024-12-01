@@ -18,11 +18,15 @@ html, body { overflow-x: hidden; } body { position: relative; }
     font-style: normal;
   }
 
-  
+  h4, h3, h2, h5{
+    font-weight:600;
+}
 body {
     background-color: rgb(105, 105, 105);
     font-family: "Roboto", sans-serif;
     font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-weight:500;
     /* font-family: "Host Grotesk", sans-serif; */
 
 }

@@ -18,18 +18,47 @@
 
       <div class="app" id="appIt">
 
-          <div id="menu" class="menu no-print">
+          <div id="menu" class="toolbar menu no-print">
+
+            <div class="filter-menu dropdown">
+
+              <button class="btn btn-transparent dropdown-toggle pt-2 text-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="public/assets/icons/filter-black.png" alt="add" width="22" height="26" > 
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="fetchDatabaseBy('status', 'DESC')">Status</a></li>
+                <li><a class="dropdown-item" href="#" onclick="fetchDatabaseBy('fJname', 'ASC')">Job Name</a></li>
+                <li><a class="dropdown-item" href="#" onclick="fetchDatabaseBy('fDate', 'ASC')">Archive</a></li>
+                <li><a class="dropdown-item" href="#" onclick="fetchDatabaseBy('invoiceId', 'DESC')">Recent</a></li>
+                <li><a class="dropdown-item" href="#" onclick="fetchDatabaseBy('vendorId', 'ASC')">Vendor</a></li>
+                <li><a class="dropdown-item" href="#" onclick="fetchDatabaseBy('fCity', 'ASC')">City</a></li>
+                <li><a class="dropdown-item" href="#" onclick="fetchDatabaseBy('fPo', 'ASC')">PO</a></li>
+                <li><a class="dropdown-item" href="#" onclick="fetchAllInvoices()">Date</a></li>
+                
+              </ul>
+            </div>
+
+
             <button class="btn btn-transparent" type="button" onclick="fetchAllInvoices()">
-              <img src="public/assets/icons/contract-black.png" alt="add" width="22" height="22" > Invoices
+              <img src="public/assets/icons/assignment-black.png" alt="add" width="23" height="22" >
             </button>
             <button class="btn btn-transparent" type="button" 
                 onclick="location.reload()">
-              <img src="public/assets/icons/edit-black.png" alt="add" width="22" height="22" > New
+              <img src="public/assets/icons/edit-black.png" alt="add" width="23" height="22" >
             </button>
             <button class="btn btn-transparent" type="button" 
                 onclick="openFullscreen()">
-              <img src="public/assets/icons/arrow-down-black.png" alt="add" width="22" height="22" > Full Screen
+              <img src="public/assets/icons/fullscreen-black.png" alt="add" width="22" height="22" > 
             </button>
+            <button class="btn btn-transparent" type="button" 
+                onclick="fetchDatabase()">
+              <img src="public/assets/icons/database-black.png" alt="add" width="22" height="23" > 
+            </button>
+
+
+
+    
+            
             
           </div>
 
@@ -53,6 +82,10 @@
                       </div>
 
                       <div class="job-btn-bar btn-group pt-0 d-flex justify-content-start no-print" style="width:100%;">
+                        
+                        <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addNewCustomer" type="button">
+                          <img src="public/assets/icons/person-add-black.png" alt="add" width="28" height="28" >
+                        </button>                      
                         <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addItemModal" type="button">
                             <img src="public/assets/icons/add-black.png" alt="add" width="28" height="28" >
                         </button>
@@ -74,10 +107,6 @@
                     <div id="imgLoading"></div>
                       <div id="logoContainer" class="d-flex justifiy-content-center">
                         <img class="d-block mx-auto mb-1" src="public/assets/logos/brm-logo.jpg" alt="paid" width="72" height="57">
-                  
-                          <span class="text-danger small">
-                            <img class="img-fluid mx-auto ms-2" class="" src="public/assets/icons/payment-due.png" alt="due" width="50" height="50">
-                          </span>
                       </div>
                     
                       <h2>Invoice</h2>
@@ -90,8 +119,10 @@
  
                 <div class="job-details col-md-7 col-lg-5 order-md-last px-0">
                   <h5 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="bm-text-primary">Job Items</span>
-                    <span class="badge bm-bg-primary rounded-pill" id="totalProductLength">0</span>
+                    <span class="bm-text-black">
+                      <img class="me-1" src="public/assets/icons/work-black.png" width="23" height="23">
+                      Job Items</span>
+                    <span class="badge bg-black rounded-pill" id="totalProductLength">0</span>
                   </h5>
                   <ul class="list-group mb-3 list-unstyled bg-white " id="productListGroup">
 
@@ -105,12 +136,12 @@
 
                 </div>
 
-                <div class="job-address col-md-5 col-lg-7 px-0">
+                <div class="job-address col-md-5 col-lg-7 px-1">
                   <h5 id="jobAddressBtn" class="mb-3 address" onclick="showJobAddress()">
-                    <img id="dropdownImg" src="public/assets/icons/menu-black.png" width="40" height="40">
-                      Job address
+                    <img id="dropdownImg" src="public/assets/icons/menu-open-black.png" width="25" height="25">
+                      Job Address
                   </h5>
-                  <h5>Invoice # <span id="invoiceNumber"></span></h5>
+                  <h5 class="d-none">Invoice # <span id="invoiceNumber"></span></h5>
 
                   <div class="job-address-formatted" id="jobAddressFormated">
                     <div class="container">
@@ -181,21 +212,159 @@
 
                     </form>
                   </div>
+                  
+                  <div class="text-center mt-3" id="jumpBtn">
+                    <a href="#root" class="btn btn-light" onclick="showJobAddress()">Hide Job Address</a>
+                  </div>
+                </div>
+              </main>
+          </div>
+        
+
+
+            <!-- modal add customer-->
+            <div class="modal fade" id="addNewCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered" >
+                <div class="modal-content px-1" style="min-height: 70vh; line-height:14px;">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addNewCustomerLabel">Add Customer</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body m-0 p-0" id="addNewCustomerBody">
+                  
+                    
+                    <form class="add-company">
+                      <div class="row g-0 m-0 p-0">
+
+                        <div class="col-12">
+                          <label for="company" class="form-label">Company</label>
+                          <input type="text" class="form-control" id="company" name="company">
+                        </div>
+
+                        <div class="col-12">
+                          <label for="cPhone" class="form-label">Phone</label>
+                          <input type="text" class="form-control" id="cPhone" name="cPhone">
+                        </div>
+
+                        <div class="col-12">
+                          <label for="cAddress" class="form-label">Address</label>
+                          <input type="text" class="form-control" id="cAddress" name="cAddress">
+                        </div>
+
+                        <div class="col-12">
+                          <label for="cCity" class="form-label">City</label>
+                          <input type="text" class="form-control" id="cCity" name="cCity">
+                        </div>
+
+
+                        <div class="col-12">
+                          <label for="cState" class="form-label">State</label>
+                          <select class="form-select" id="cState" name="cState" required="">
+                            <option value="">Choose...</option>
+                            <option>PA</option>
+                            <option>WV</option>
+                            <option>OH</option>
+                            <option>FL</option>
+                          </select>
+                        </div>
+
+                        <div class="col-12">
+                          <label for="cZip" class="form-label">Zip</label>
+                          <input type="text" class="form-control" id="cZip" name="cZip" required="">
+                        </div>
+
+
+                        <div class="col-12">
+                          <label for="cEmail" class="form-label">Email</label>
+                          <input class="form-control" id="cEmail" name="cEmail" required="">
+                        </div>
+
+                        <div class="col-12">
+                          <label for="cAttn" class="form-label">Attn</label>
+                          <input class="form-control" id="cAttn" name="cAttn" required="">
+                        </div>
+
+                      </div>
+
+                    </form>
+
+                  </div>
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="addNewCustomer()" data-bs-dismiss="modal" class="btn btn-primary">Add</button>
+                  </div>
                 </div>
               </div>
-            </main>
+            </div>
+            
 
-            <!-- modal -->
+
+            <!-- modal add new product-->
+            <div class="modal fade" id="addNewServiceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered" >
+                <div class="modal-content  px-1" style="min-height: 50vh;">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addNewServiceModalLabel">Add New Service</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body m-0 p-0" id="addNewServiceModalBody">
+                  
+                    <form class="add-company">
+                      <div class="row g-0 m-0 p-0">
+
+                        <div class="col-12">
+                          <label for="pItem" class="form-label">Item</label>
+                          <input type="text" class="form-control" id="pItem" name="pItem">
+                        </div>
+
+                        <div class="col-12">
+                          <label for="pDescription" class="form-label">Description</label>
+                          <input type="text" class="form-control" id="pDescription" name="pDescription">
+                        </div>
+
+                        <div class="col-12">
+                          <label for="pQty" class="form-label">Qty</label>
+                          <input type="text" class="form-control" id="pQty" name="pQty">
+                        </div>
+
+                        <div class="col-12">
+                          <label for="pCost" class="form-label">Cost</label>
+                          <input type="text" class="form-control" id="pCost" name="pCost">
+                        </div>
+
+
+                      </div>
+
+                    </form>
+
+
+                  </div>
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="addCustomerToVendorList()" class="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- modal - add job item -->
             <div class="modal fade" id="addItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-              <div class="modal-dialog m-0 p-0  mx-auto  ">
+              <div class="modal-dialog m-0 p-0 mt-2 mx-auto  ">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addItemModalLabel">Add Item</h1>
+                    <h1 class="modal-title fs-5" id="addItemModalLabel">Add Job Item</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body m-0 p-0" id="addItemModalBody">
                   
-                    
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addNewServiceModal" type="button">
+                      <img src="public/assets/icons/add-black.png" alt="add" width="28" height="28" >
+                        New service type to list
+                    </button>
+
                     <table class="table m-0 p-0">
                       <thead>
                         <tr>
@@ -238,6 +407,7 @@
               <p class="mb-1">© 2014–2024 BRM Contractors Inc</p>
             </footer>
             
+
             <textarea hidden rows=10 cols=40 name="dbString" id="dbString" class="border-0 bg-transparent"></textarea>
             <small hidden>JSON to be stored in db</small>
             <textarea hidden  rows=10 cols=40 name="dbHtml" id="dbHtml" class="border-0 bg-transparent">[</textarea>
@@ -259,6 +429,8 @@
     <script src="public/js/fetchAllInvoices.js"></script>
     <script src="public/js/fetchInvoiceById.js"></script>
     <script src="public/js/pdfInvoicer.js"></script>
+    <script src="public/js/fetchDatabase.js"></script>
+    <script src="public/js/addNewCustomer.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
@@ -266,7 +438,7 @@
 
     
     <script>
-      if (pre == `http://localhost:5200`) { 
+      if (pre == `http://localhost:5200` || pre == `http://localhost:6900`) { 
         document.getElementById('menu').innerHTML += `<small class="text-danger float-end ms-2 pt-3 "> ${pre} </small>`;
         document.getElementById('menu').style.backgroundColor = '#ecb8b8'
       }

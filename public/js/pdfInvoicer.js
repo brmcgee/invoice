@@ -113,15 +113,15 @@ function generatePDF(){
   var lineHeights=12;
 
 
-  // let img1 = getDataUriFromImageUrl('public/assets/icon/invoice.png')
-  // .then(dataUri => {
-  //   console.log(dataUri)
-  //   return dataUri
-  //   // Use the data URI as needed, e.g., set it as the src of an <img> element
-  // })
-  // .catch(error => {
-  //   console.error(error);
-  // });
+  let img1 = getDataUriFromImageUrl(`${invoiceData.fImg}`)
+  .then(dataUri => {
+    console.log(dataUri)
+    return dataUri
+    // Use the data URI as needed, e.g., set it as the src of an <img> element
+  })
+  .catch(error => {
+    console.error(error);
+  });
 
 
   
@@ -326,7 +326,7 @@ function generatePDF(){
   doc.setFontType('bold');
   doc.text('For '+ customer[0].name + ',',rightcol2-10, startY+=lineSpacing.NormalSpacing+25);
   doc.text(`Thank you ${company.name}!`,rightcol2-10, startY+=lineSpacing.NormalSpacing+25);
-  doc.save(`brm#${invoiceData.invoiceId}_${customer[0].name.slice(0,5)}_${invoiceData.fJname}_po#${invoiceData.fPo}.pdf`);
+  doc.save(`brm_${invoiceData.invoiceId}_${customer[0].name.slice(0,5)}_${invoiceData.fJname}_${invoiceData.fPo}.pdf`);
 
   console.log('output pdf')
   console.log(`brm${invoiceData.invoiceId}_${customer[0].name.slice(0,5)}_${invoiceData.fPo}.pdf`)

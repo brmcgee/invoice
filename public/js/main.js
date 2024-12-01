@@ -1,6 +1,8 @@
 let productList = [];
 let activeVendor = [];
+
 let pre = `http://localhost:5200`;
+pre = `https://office.boxcar.site`;
 
 
 function el(target){
@@ -35,13 +37,14 @@ function showJobAddress(){
         el('#dropdownImg').src = 'public/assets/icons/menu-open-black.png'
         dropdownEl.style.display = 'block';
         el('#jobAddressFormated').style.display = 'none';
+        document.getElementById('jumpBtn').innerHTML = '<a href="#root" class="btn btn-light" onclick="showJobAddress()">Hide Job Address</a>'
     } 
 
     else {
-
         el('#dropdownImg').src = 'public/assets/icons/menu-black.png'
         dropdownEl.style.display = 'none';
         el('#jobAddressFormated').style.display = 'block';
+        document.getElementById('jumpBtn').innerHTML = '<a href="#root" class="btn btn-light" onclick="showJobAddress()">Show Job Address</a>'
     }
   
 }

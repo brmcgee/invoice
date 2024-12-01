@@ -8,40 +8,40 @@ const vendor = [
         'zip' : '15137',
         'phone' : '412-678-2929',
         'email' : 'brianrmcgee@gmail.com',
-        'img' : ''
+        'img' : 'https://office.boxcar.site/backoffice/src/public/assets/logos/slack-300-400.png'
     },
     {
         'vendorId' : 1,
         'name' : 'Brian McGee',
-        'address' : 'PO Box 122',
-        'city' : 'Crabtree',
+        'address' : 'PO Box 66',
+        'city' : 'Hannstown',
         'state' : 'PA',
         'zip' : '15635',
-        'phone' : '724-787-1233',
-        'email' : 'brian@boxcar.site',
-        'img' : ''
+        'phone' : '724-787-3758',
+        'email' : 'brianrmcgee@gmail.com',
+        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
     },
     {
         'vendorId' : 2,
-        'name' : 'Atlas Garage Door',
+        'name' : 'US Garage Door',
         'address' : '1619 Federal Hwy',
         'city' : 'Pittsbrugh',
         'state' : 'PA',
         'zip' : '16330',
         'phone' : '412-963-7854',
-        'email' : 'brian@boxcar.site',
-        'img' : ''
+        'email' : 'brm_dev@outlook.com',
+        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
     },
     {
         'vendorId' : 3,
-        'name' : 'DoorMasters',
+        'name' : 'Attn',
         'address' : 'Address',
-        'city' : '12346 116th Street',
-        'state' : 'Pittsburgh',
-        'zip' : 'PA',
-        'phone' : '16464',
-        'email' : 'brian@boxcar.site',
-        'img' : ''
+        'city' : '',
+        'state' : '',
+        'zip' : '',
+        'phone' : '',
+        'email' : 'brm_dev@outlook.com',
+        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
     },
     {
         'vendorId' : 4,
@@ -51,8 +51,8 @@ const vendor = [
         'state' : 'PA',
         'zip' : '16797',
         'phone' : '412-523-9536',
-        'email' : 'brian@boxcar.site',
-        'img' : ''
+        'email' : 'brianmcgee@live.com',
+        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
     },
     {
         'vendorId' : 5,
@@ -63,7 +63,7 @@ const vendor = [
         'zip' : '16797',
         'phone' : '412-523-9536',
         'email' : 'brian@boxcar.site',
-        'img' : ''
+        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
     },
     {
         'vendorId' : 6,
@@ -73,10 +73,22 @@ const vendor = [
         'state' : 'PA',
         'zip' : '16797',
         'phone' : '412-523-9536',
-        'email' : 'brian@boxcar.site',
-        'img' : ''
-    }     
+        'email' : 'brian@mcgee.boxcar',
+        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
+    },
+    {
+        'vendorId' : 7,
+        'name' : 'H Shenk',
+        'address' : '123 Main St',
+        'city' : 'Pittsburgh',
+        'state' : 'PA',
+        'zip' : '16797',
+        'phone' : '412-523-9536',
+        'email' : 'hmcgee24@excelahelth.net',
+        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
+    }      
 ];
+
 const products = [
     {
         'prodId' : 0,
@@ -211,4 +223,18 @@ const products = [
         'cost' : 75,
         'unit' : 'each'
     },
+    {
+        'prodId' : 19,
+        'item' : "Debris Removal",
+        'description' : 'standard labor to remove debris',
+        'cost' : 75,
+        'unit' : 'hr'
+    },
+    {
+        'prodId' : 20,
+        'item' : "Disposal",
+        'description' : 'disposal charge',
+        'cost' : 25,
+        'unit' : 'each'
+    }
 ];

@@ -5,7 +5,7 @@ function fetchInvoiceById (invoiceId){
 }
 
 async function handleFetchInvoiceById(invoiceId) {
-    let url = `${pre}/invoices/${invoiceId}}`;
+    let url = `${pre}/invoices/${invoiceId}`;
 try {
     let response = await fetch(url)
     root.innerHTML = loader('info', `Fetching invoice ${invoiceId}..`);
@@ -28,7 +28,9 @@ try {
 
 let idata = [];
 function htmlFetchInvoiceById(d) {
+  let company = (JSON.parse(d[0].fVendor))
     idata = d[0];
+
     let html = '<div class="job-header py-2  row">'
     html += `
     
@@ -41,11 +43,11 @@ function htmlFetchInvoiceById(d) {
                 <div class="job-vendor col-7 ps-2">
                     <div class="container"  style="min-height: 115px;">
                       <h5 class="mb-0">Submitted to:</h5>
-                      <p class="p-0 m-0" id="vName">${vendor[d[0].vendorId].name}</p>
-                      <p class="p-0 m-0 small" id="vAddress">${vendor[d[0].vendorId].address}</p>
-                      <p class="p-0 m-0 small" id="vCity">${vendor[d[0].vendorId].city}, ${vendor[d[0].vendorId].state} ${vendor[d[0].vendorId].zip}</p>
-                      <p class="p-0 m-0 small" id="vEmail">${vendor[d[0].vendorId].email}</p>
-                      <p class="p-0 m-0 small">Phone: <span id="vPhone"></span></p>
+                      <p class="p-0 m-0" id="vName">${company[0].name}</p>
+                      <p class="p-0 m-0 small" id="vAddress">${company[0].address}</p>
+                      <p class="p-0 m-0 small" id="vCity">${company[0].city}</p>
+                      <p class="p-0 m-0 small" id="vEmail">${d[0].vEmail}</p>
+                      <p class="p-0 m-0 small">Phone: <span id="vPhone">${company[0].phone}</span></p>
                     </div>
 
                     <div class="job-btn-bar btn-group no-print pt-0 d-flex justify-content-start" style="width:100%;">
@@ -72,7 +74,6 @@ function htmlFetchInvoiceById(d) {
                    </div>
 
                 </div>
-                <img id="iImg" src="${d[0].fImg}" width="100" style="display:none;">
 
                 <div class="job-logo col-5 text-center">
                 <div id="imgLoading"></div>
@@ -277,6 +278,7 @@ function handleEmail(){
 
 
 }
+
 
 // <div class="container"  style="min-height: 115px;">
 // <h5 class="mb-0">Submitted to:</h5>
