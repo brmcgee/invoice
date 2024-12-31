@@ -13,7 +13,7 @@ function handleAddImage(e, formId, invoiceId) {
                
                 let d = this.response;
                 let respond = JSON.parse(d);
-                console.log(respond.url)
+
                 document.getElementById('invoiceUploadImg').src = respond.url;
                  document.getElementById('imgLoading').innerHTML = '';
             

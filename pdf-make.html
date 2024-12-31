@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+        body {
+          font-family: 'Source Sans Pro', sans-serif;
+          background: #b9b9b9;
+          color: #3d3d3d;
+          margin: 20px;
+        }
+        
+        #imgCat {
+          width: 25%;
+        }
+        
+        </style>
+</head>
+<body>
+    
+
+    <h1>jsPDF Invoice Template Demo</h1>
+    <script>
+      let invoiceData = 
+      {
+        "invoiceId": 84,
+        "fJname": "Southern Apartments",
+        "fAddress": "9665 Apple Bottom Dr",
+        "fCity": "South HIlls",
+        "fState": "PA",
+        "fZip": "16464\n    ",
+        "fPo": "S0003114",
+        "fDate": "2024-11-27T05:00:00.000Z",
+        "fVendor": "[{\"id\":2,\"name\":\"Slack Overhead Doors\",\"address\":\"1619 Federal Hwy\",\"city\":\"Pittsbrugh, PA 16330\",\"phone\":\"412-963-7854\"}]",
+        "fProducts": "[{\"prodId\":0,\"item\":\"Double 14-16ft door\",\"description\":\"door install only\",\"qty\":\"3\",\"cost\":\"1020\"},{\"prodId\":1,\"item\":\"Residential opener\",\"description\":\"opener install only\",\"qty\":\"3\",\"cost\":\"240\"},{\"prodId\":2,\"item\":\"Wood jamb - 1x/2x\",\"description\":\"wood work install only\",\"qty\":\"64\",\"cost\":\"128\"},{\"prodId\":3,\"item\":\"Aluminum trim\",\"description\":\"fabricate/install only\",\"qty\":\"64\",\"cost\":\"128\"},{\"prodId\":4,\"item\":\"Lockbar/Snaplatch\",\"description\":\"install only\",\"qty\":\"1\",\"cost\":\"15\"},{\"prodId\":5,\"item\":\"Deco Handle/Hinge\",\"description\":\"install only\",\"qty\":\"1\",\"cost\":\"10\"},{\"prodId\":6,\"item\":\"Trip charge\",\"description\":\"standard trip charge\",\"qty\":\"1\",\"cost\":\"55\"},{\"prodId\":7,\"item\":\"Electrical misc\",\"description\":\"Receptacle outlet labor charge\",\"qty\":\"4\",\"cost\":\"220\"}]",
+        "fImg": "https://office.boxcar.site/invoice-uploads/20160113_162650 - Copy.jpg",
+        "vendorId": 0,
+        "cost": 1816,
+        "status": "paid",
+        "vEmail": "brianrmcgee@gmail.com"
+      };
+
+
+    </script>
+    <button onclick="generatePDF(invoiceData)"> Download PDF </button>
+
+
+    <div id="root"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.1.1/jspdf.plugin.autotable.min.js"></script>
+
+    <script src="public/js/pdfInvoicer.js"></script>
+</body>
+</html>

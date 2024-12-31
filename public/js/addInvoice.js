@@ -19,7 +19,10 @@ async function handleSaveBlog() {
     let vendorId = document.getElementById('vendor');
     let cost = Number(document.getElementById('totalCost').innerHTML);
     let email = document.getElementById('vEmail').innerHTML;
-    let params = `email=${email}&&cost=${cost}&&vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
+    let door = document.getElementById('door').value;
+    let color = document.getElementById('color').value;
+
+    let params = `door=${door}&&color=${color}&&email=${email}&&cost=${cost}&&vendorId=${vendorId.value}&&fJname=${fJname.value}&&fAddress=${fAddress.value}&&fCity=${fCity.value}&&fState=${fState.value}&&fZip=${fZip.value}
             &&fPo=${fPo.value}&&fDate=${fDate.value}&&fVendor=${JSON.stringify(activeVendor)}&&fProducts=${JSON.stringify(productList)}`;
 
     if (fDate.value == '') { alert('Enter job date!'); return;}
@@ -55,9 +58,9 @@ function updateSavedBlog(data) {
                 <div class="job-vendor col-7 ps-2">
                     <div class="container"  style="min-height: 115px;">
                       <h5 class="mb-0">Submitted to:</h5>
-                      <p class="p-0 m-0" id="vName">${vendor[d[0].vendorId].name}</p>
-                      <p class="p-0 m-0 small" id="vAddress">${vendor[d[0].vendorId].address}</p>
-                      <p class="p-0 m-0 small" id="vCity">${vendor[d[0].vendorId].city}, ${vendor[d[0].vendorId].state} ${vendor[d[0].vendorId].zip}</p>
+                      <p class="p-0 m-0" id="vName">${d[0].customer[0].name}</p>
+                      <p class="p-0 m-0 small" id="vAddress">${d[0].customer[0].address}</p>
+                      <p class="p-0 m-0 small" id="vCity">${d[0].customer[0].city}, ${d[0].customer[0].state} ${d[0].customer[0].zip}</p>
                       <p class="p-0 m-0 small">Phone: <span id="vPhone"></span></p>
                     </div>
 

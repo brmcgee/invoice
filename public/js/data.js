@@ -1,95 +1,18 @@
-const vendor = [
+// data variable written over at main try/catch 
+let vendor = [
     {
         'vendorId' : 0,
-        'name' : 'Slack Overhead Doors',
-        'address' : '455 E Pittsburgh McKeesport Blvd',
+        'name' : 'Blank Overhead Doors',
+        'address' : '1000 E Pittsburgh McKeesport Blvd',
         'city' : 'North Versailles',
         'state' : 'PA',
         'zip' : '15137',
-        'phone' : '412-678-2929',
-        'email' : 'brianrmcgee@gmail.com',
+        'phone' : '412-785-2929',
+        'email' : 'brianmcgee@gmail.com',
         'img' : 'https://office.boxcar.site/backoffice/src/public/assets/logos/slack-300-400.png'
-    },
-    {
-        'vendorId' : 1,
-        'name' : 'Brian McGee',
-        'address' : 'PO Box 66',
-        'city' : 'Hannstown',
-        'state' : 'PA',
-        'zip' : '15635',
-        'phone' : '724-787-3758',
-        'email' : 'brianrmcgee@gmail.com',
-        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
-    },
-    {
-        'vendorId' : 2,
-        'name' : 'US Garage Door',
-        'address' : '1619 Federal Hwy',
-        'city' : 'Pittsbrugh',
-        'state' : 'PA',
-        'zip' : '16330',
-        'phone' : '412-963-7854',
-        'email' : 'brm_dev@outlook.com',
-        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
-    },
-    {
-        'vendorId' : 3,
-        'name' : 'Attn',
-        'address' : 'Address',
-        'city' : '',
-        'state' : '',
-        'zip' : '',
-        'phone' : '',
-        'email' : 'brm_dev@outlook.com',
-        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
-    },
-    {
-        'vendorId' : 4,
-        'name' : 'Door America',
-        'address' : '123 Main St',
-        'city' : 'Pittsburgh',
-        'state' : 'PA',
-        'zip' : '16797',
-        'phone' : '412-523-9536',
-        'email' : 'brianmcgee@live.com',
-        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
-    },
-    {
-        'vendorId' : 5,
-        'name' : 'Tri State Doors',
-        'address' : '123 Main St',
-        'city' : 'Pittsburgh',
-        'state' : 'PA',
-        'zip' : '16797',
-        'phone' : '412-523-9536',
-        'email' : 'brian@boxcar.site',
-        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
-    },
-    {
-        'vendorId' : 6,
-        'name' : 'Americana Doors',
-        'address' : '123 Main St',
-        'city' : 'Pittsburgh',
-        'state' : 'PA',
-        'zip' : '16797',
-        'phone' : '412-523-9536',
-        'email' : 'brian@mcgee.boxcar',
-        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
-    },
-    {
-        'vendorId' : 7,
-        'name' : 'H Shenk',
-        'address' : '123 Main St',
-        'city' : 'Pittsburgh',
-        'state' : 'PA',
-        'zip' : '16797',
-        'phone' : '412-523-9536',
-        'email' : 'hmcgee24@excelahelth.net',
-        'img' : 'https://cdn-icons-png.flaticon.com/512/10948/10948348.png'
-    }      
+    },     
 ];
-
-const products = [
+let products = [
     {
         'prodId' : 0,
         'item' : "Residential opener",
@@ -238,3 +161,10 @@ const products = [
         'unit' : 'each'
     }
 ];
+
+
+
+
+
+
+

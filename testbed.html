@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice Maker</title>
+
+  <link rel="icon" type="image/x-icon" href="https://office.boxcar.site/public/assets/icons/favicon.ico" />
+  <link rel="stylesheet" href="https://office.boxcar.site/public/css/fonts.css" /> 
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <style>
+
+    *{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 500;
+    }
+    .bg-danger {
+      /* background-image: url('public/assets/images/bg.jpg'); */
+      background-color: #940f0f !important;
+    }
+
+    .bg-logo {
+      background-color: #000000 !important;
+      color: #e2e2e2;
+      border-radius: 10% !important;
+      box-shadow: 2px 2px 12px rgb(126, 126, 126);
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .form-select,
+    .form-control {
+      line-height: 17px;
+      padding: 18px;
+      padding-top: 24px;
+      padding-bottom: 6px;
+      border-radius: 3px;
+      border: 2px solid rgb(177, 177, 177);
+      background-color: rgb(255, 255, 255);
+    }
+
+    .form-label {
+      padding: 0px;
+      margin: 0;
+      position: relative;
+      top: 22px;
+      left: 5px;
+      font-weight: 500;
+      color: #414141;
+      font-size: smaller;
+    }
+  </style>
+</head>
+
+<body class="bg-secondary">
+
+  <div class="wrapper bg-light mx-auto" style="max-width: 1350px;">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Edit Invoice</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="px-1">
+          <div class="job-details">
+            <small class="rounded-pill bg-danger badge">Job Details</small><br />
+
+            <label for="" class="form-label">Invoice Id</label>
+            <input type="text" value="" name="invoiceId" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">Date</label>
+            <input type="text" value="" name="fDate" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">Due Date</label>
+            <input type="text" value="" name="dueDate" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">Jobname</label>
+            <input type="text" value="" name="fJname" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">Address </label>
+            <input type="text" value="" name="fAddress" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">PO</label>
+            <input type="text" value="" name="fPo" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">City, State Zip</label>
+            <input type="text" value="" name="fCity" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+          </div>
+
+          <div class="job-from">
+            <small class="rounded-pill bg-danger badge">From</small><br />
+            <label for="" class="form-label">From </label>
+            <input type="text" value="" name="from" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">Phone</label>
+            <input type="text" value="" name="fromPhone" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="" class="form-label">Email</label>
+            <input type="text" value="" name="fromEmail" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+          </div>
+
+          <div class="job-vendor">
+            <small class="rounded-pill bg-danger badge">To</small><br />
+            <label for="" class="form-label">Name</label>
+            <input type="text" value="" name="name" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="address" class="form-label">Address</label>
+            <input type="text" value="" name="address" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="city" class="form-label">City/State Zip </label>
+            <input type="text" value="" name="city" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="phone" class="form-label">Phone </label>
+            <input type="text" value="" name="phone" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+
+            <label for="vEmail" class="form-label">Email </label>
+            <input type="text" value="" name="vEmail" onkeyup="handleInputChange(this.value, this.name)"
+              class="form-control" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="inv" class="float-end bg-light vh-100"></div>
+    </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.1.1/jspdf.plugin.autotable.min.js"></script>
+
+
+  <script>
+    let invData = [
+      {
+        invoiceId: 0,
+        fJname: "Jobname",
+        fAddress: "123 Main St",
+        fCity: "Mycity, State 12314",
+        fState: "",
+        fZip: "",
+        fPo: "SC00316",
+        fDate: new Date(),
+        fVendor: '[{"id":23,"name":"Sample Customer","address":"","city":"","phone":""}]',
+        fProducts:
+          '[{"prodId":2,"item":"Double 14-16ft door","description":"door install only","qty":"1","cost":"340"},{"prodId":0,"item":"Residential opener","description":"opener install only","qty":"1","cost":"80"}]',
+        fImg: "favico.ico",
+        vendorId: 23,
+        cost: 420,
+        from: 'Sample Customer',
+        fromPhone: '123-999-9999',
+        fromEmail: 'me@aemail.com',
+        status: "unpaid",
+        initial: 'SC',
+        vEmail: "",
+        isHide: "false",
+        door: "",
+        color: "",
+        isEmailed: null,
+        timePaid: "false",
+        address2: "",
+        dueDate: "",
+        th_img: "",
+      },
+    ];
+    function editDate(ts) {
+
+      const date = new Date(ts);
+      let day = date.getDate(ts); let month = date.getMonth(ts) + 1; let year = date.getFullYear(ts); let da = date.getDay(ts); let actualDay = '';
+      if (da == 0) { actualDay = 'Sun' }
+      if (da == 1) { actualDay = 'Mon' }
+      if (da == 2) { actualDay = 'Tue' }
+      if (da == 3) { actualDay = 'Wen' }
+      if (da == 4) { actualDay = 'Thur' }
+      if (da == 5) { actualDay = 'Fri' }
+      if (da == 6) { actualDay = 'Sat' }
+      let formattedDate = `${actualDay} ${month}/${day}/${year}  `
+
+      return formattedDate;
+    }
+
+    function handleInputChange(val, id) {
+      if (id == "name" || id == "address" || id == "city" || id == "phone") {
+        let vendorObj = JSON.parse(invData[0].fVendor);
+        vendorObj[0][id] = val;
+        let newStr = JSON.stringify(vendorObj);
+        invData[0].fVendor = newStr;
+      }
+      if (id == "from" && val != "") {
+        document.getElementById("initials").innerHTML = val[0];
+        if (val.split(" ").length > 1) {
+          document.getElementById("initials").innerHTML = "";
+          let arr = val.split(" ");
+          arr.forEach((a) => {
+            document.getElementById("initials").innerHTML += a[0].toUpperCase();
+          });
+        }
+      }
+      invData[0].initial = document.getElementById('initials').innerHTML;
+      invData[0][id] = val;
+      let el = document.getElementById(id);
+      el.innerHTML = val;
+    }
+
+    html = htmlTemplateInvoice(invData[0]);
+    document.getElementById("inv").innerHTML = html;
+
+    function htmlTemplateInvoice(data) {
+      d = data;
+      let html = ``;
+      let prodsToInsert = ``;
+      let prodObj = JSON.parse(d.fProducts);
+      let vendorObj = JSON.parse(d.fVendor)[0];
+      prodObj.forEach((p) => {
+        prodsToInsert += `
+                      <tr>
+                          <th scope="row">${p.prodId}</th>
+                          <td>${p.item}</td>
+                          <td>${p.description}</td>
+                          <td class="text-end">${p.qty}</td>
+                          <td class="text-end">${p.cost}</td>
+                      </tr> 
+          `;
+      });
+      html += `
+  <section class="py-2 py-md-3 border">
+      <div class="container-lg">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xl-10">
+            <div class="row gy-3 mb-1">
+              <div class="col-6">
+                <h2 class="text-uppercase text-endx m-0">Invoice</h2>
+                  <button class="btn btn-danger bg-danger btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                    Edit Invoice
+                  </button>
+                  <button class="btn btn-danger bg-danger btn-sm" onclick="generatePDF()"> Download PDF </button>
+              </div>
+              <div class="col-6 d-flex flex-column">
+                <a class="d-block text-end text-decoration-none text-light" href="#">
+
+                  <div class="mx-auto float-end ms-2">
+                    <div class="bg-logo d-flex justify-content-center align-items-baseline h-100 rounded-3" style="width:175px;height:144px;">
+                      <h1 class="display-1 mt-1 mb-3" id="initials" style="min-height:90px;">WD</h1>
+                    </div>
+                  </div>
+                </a>
+              ${d.timePaid != "false"
+          ? `<p class="mt-1 text-end me-4"><span class="badge fs-4 bg-success rounded-pill">PAID</span></p>`
+          : `<p class="mt-1 text-end me-4"><span class="badge fs-4 bg-danger rounded-pill">DUE</span></p>`
+        }
+              </div>
+              <div class="col-12">
+                <h4>From</h4>
+                <address>
+                  <strong id="from"></strong><br>
+                  Phone: <span id="fromPhone"></span><br>
+                  Email: <span id="fromEmail"></span>
+                </address>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-12 col-sm-6 col-md-7">
+                <h4>Bill To</h4>
+                <address>
+                  <strong><span id="name">${vendorObj.name}</span></strong><br>
+                  <span id="address">${vendorObj.address}</span><br>
+                  <span id="city">${vendorObj.city}</span><br>
+                  <span id="phone">Phone: ${vendorObj.phone}</span><br>
+                  Email: <span id="vEmail">${d.vEmail}</span>
+                </address>
+              </div>
+              <div class="col-12 col-sm-6 col-md-5">
+
+                <h5 class="row text-black ">
+                  <span class="col-6 fs-6"><strong>Due date</strong></span>
+                  <span class="col-6 text-sm-end fs-6 text-danger"  id="dueDate">
+                      ${d.timePaid == "false"
+          ? d.dueDate
+          : '<span class="text-success">PAID</span>'
+        }  
+                  </span>
+                </h5>
+
+                <h4 class="row">
+                  <span class="col-6">Invoice #</span>
+                  <span class="col-6 text-sm-end" id="invoiceId">${d.invoiceId
+        }</span>
+                </h4>
+    
+                <div class="row">
+                  <span class="col-5">Invoice Date</span>
+                  <span class="col-7 text-sm-end" id="fDate">${editDate(
+          d.fDate
+        )}</span>
+                  <span class="col-5">Jobname</span>
+                  <span class="col-7 text-sm-end" id="fJname">${d.fJname}</span>
+                  <span class="col-5">Job PO</span>
+                  <span class="col-7 text-sm-end" id="fPo">${d.fPo}</span>
+                  <span class="col-5">Job Address</span>
+                  <span class="col-7 text-sm-end" id="fAddress">${d.fAddress
+        }</span>
+                  <span class="col-5"></span>
+                  <span class="col-7 text-sm-end" id="fCity">${d.fCity}, ${d.fState
+        } ${d.fZip}
+      </span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-12">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-uppercase">Qty</th>
+                        <th scope="col" class="text-uppercase">Product</th>
+                        <th scope="col" class="text-uppercase">Description</th>
+                        <th scope="col" class="text-uppercase text-end">Price</th>
+                        <th scope="col" class="text-uppercase text-end">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider"> 
+              `;
+      html += prodsToInsert;
+      html += `
+                      <tr>
+                        <th scope="row" colspan="4" class="text-uppercase text-end">Total</th>
+                        <td class="text-end">${d.cost}</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          <div class="row">
+              <div class="col-8">
+                  <a href="${d.fImg}">
+                      <img src="${d.th_img}" style="max-width:300px;">
+                  </a>
+                  <p class="small text-secondary">${d.door.toUpperCase()} - ${d.color.toUpperCase()}</p>
+                      <br>
+
+                    ${d.isEmailed == null
+          ? `<p class="small text-info m-0 p-0">Emailed invoice : saved</p>`
+          : `<p class="small text-primary m-0 p-0">Emailed invoice : Sat Dec 21 2024 19:53</p>`
+        }
+
+                    ${d.timePaid == "false"
+          ? `<p class="small text-danger m-0 p-0">Paid invoice : Balance Due</p>`
+          : `<p class="small text-success m-0 p-0">Paid invoice : ${d.timePaid}</p>`
+        }
+                  
+
+              </div>
+                  <div class="col-4 text-end">
+                      <button class="btn btn-transparent no-print" onclick="window.print()" type="button">
+                          <img src="https://invoice.boxcar.site/public/assets/icons/print-black.png" alt="add" width="60" height="60">
+                      </button>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      </section>      
+        
+        `;
+      return html;
+    }
+  </script>
+
+  <script>
+    function generatePDF() {
+      let invoiceData = invData[0];
+      console.log(invoiceData);
+      let company = {
+        name: invoiceData.from,
+        email: invoiceData.fromEmail,
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        phone: invoiceData.fromPhone,
+      };
+      let customer = JSON.parse(invoiceData.fVendor);
+      let products = JSON.parse(invoiceData.fProducts);
+      products.forEach((p) => {
+        p.subTotal = p.cost / p.qty;
+      });
+
+      var company_logo = {
+        w: 80,
+        h: 50,
+      };
+
+      var fontSizes = {
+        HeadTitleFontSize: 18,
+        Head2TitleFontSize: 16,
+        TitleFontSize: 14,
+        SubTitleFontSize: 12,
+        NormalFontSize: 10,
+        SmallFontSize: 10,
+      };
+
+      var lineSpacing = {
+        NormalSpacing: 12,
+      };
+
+      var doc = new jsPDF("p", "pt");
+      var rightStartCol1 = 400;
+      var rightStartCol2 = 480;
+      var InitialstartX = 40;
+      var startX = 40;
+      var InitialstartY = 50;
+      var startY = 0;
+      var lineHeights = 12;
+
+      //   company info
+      doc.setFontSize(fontSizes.SubTitleFontSize);
+      doc.setFont("Helvetica");
+      doc.setFontType("bold");
+      doc.setFontSize(48)
+      // doc.addImage(
+      //   imgData,
+      //   "JPEG",
+      //   startX,
+      //   (startY += 50),
+      //   company_logo.w,
+      //   company_logo.h
+      // );
+      doc.setTextColor('991111');
+
+
+      doc.text(invoiceData.initial, startX, (startY += 21 + company_logo.h), "left");
+
+      doc.setTextColor('black');
+      doc.setFontSize(fontSizes.TitleFontSize)
+      doc.text(company.name, startX, (startY += 21 + company_logo.h), "left");
+
+      doc.setFontSize(fontSizes.NormalFontSize);
+      doc.setFontType("bold");
+      doc.text("Email", startX, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(company.email, 90, startY);
+
+      // doc.setFontType("bold");
+      // doc.text("Address", startX, (startY += lineSpacing.NormalSpacing));
+      // doc.setFontType("normal");
+      // doc.text(company.address, 90, startY);
+
+      // doc.setFontType("bold");
+      // doc.text("City", startX, (startY += lineSpacing.NormalSpacing));
+      // doc.setFontType("normal");
+      // doc.text(company.city, 90, startY);
+
+      doc.setFontType("bold");
+      doc.text("Phone", startX, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(company.phone, 90, startY);
+
+      // invoice info
+      doc.setFontSize(fontSizes.SubTitleFontSize);
+      var tempY = InitialstartY;
+
+      doc.setFontType("bold");
+      doc.text(
+        "INVOICE NO: ",
+        rightStartCol1,
+        (tempY += lineSpacing.NormalSpacing)
+      );
+      doc.setFontType("normal");
+      doc.text("INV00" + invoiceData.invoiceId, rightStartCol2 + 5, tempY);
+
+      doc.setFontType("bold");
+      doc.text(
+        "INVOICE Date: ",
+        rightStartCol1,
+        (tempY += lineSpacing.NormalSpacing)
+      );
+      doc.setFontType("normal");
+      doc.text(editDate(invoiceData.fDate), rightStartCol2 + 5, tempY);
+
+      doc.setFontType("bold");
+      doc.text(
+        "INVOICE PO: ",
+        rightStartCol1,
+        (tempY += lineSpacing.NormalSpacing)
+      );
+      doc.setFontType("normal");
+      doc.text(invoiceData.fPo, rightStartCol2 + 5, tempY);
+
+      doc.setFontType("bold");
+      doc.text("Total: ", rightStartCol1, (tempY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text("$" + invoiceData.cost + ".00", rightStartCol2 + 5, tempY);
+
+      doc.setFontType("normal");
+      doc.setLineWidth(1);
+      doc.line(
+        20,
+        startY + lineSpacing.NormalSpacing,
+        220,
+        startY + lineSpacing.NormalSpacing
+      );
+      doc.line(
+        350,
+        startY + lineSpacing.NormalSpacing,
+        550,
+        startY + lineSpacing.NormalSpacing
+      );
+      doc.setFontSize(fontSizes.Head2TitleFontSize);
+
+      doc.setFontType("bold");
+      doc.text(
+        "",
+        startX,
+        (startY += lineSpacing.NormalSpacing + 2),
+        null,
+        null,
+        "center"
+      );
+      doc.text(
+        "INVOICE",
+        startX + 31,
+        (startY += lineSpacing.NormalSpacing + 2),
+        null,
+        null,
+        "center"
+      );
+
+      doc.setFontType("normal");
+      doc.text("INV00" + invoiceData.invoiceId, startX + 71, startY);
+
+      doc.setFontSize(fontSizes.NormalFontSize);
+      doc.setFontType("bold");
+
+      // customer info
+      var startBilling = startY;
+
+      doc.text("", startX, (startY += lineSpacing.NormalSpacing));
+      doc.text("", startX, (startY += lineSpacing.NormalSpacing));
+
+      doc.setFontType("normal");
+      doc.text("", 80, startY);
+
+      doc.setFontType("bold");
+      doc.text("Company", startX, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(customer[0].name, 90, startY);
+
+      doc.setFontType("bold");
+      doc.text("Address", startX, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(customer[0].address, 90, startY);
+
+      doc.setFontType("bold");
+      doc.text("City", startX, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(customer[0].city, 90, startY);
+
+      doc.setFontType("bold");
+      doc.text("Email", startX, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(invoiceData.vEmail, 90, startY);
+
+      doc.setFontType("bold");
+      doc.text("Phone ", startX, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(customer[0].phone, 90, startY);
+
+      // job info
+      var rightcol1 = 340;
+      var rightcol2 = 400;
+      startY = startBilling + 20;
+
+      doc.setFontType("bold");
+      doc.text("Job Name", rightcol1, (startY += lineSpacing.NormalSpacing));
+      doc.text(invoiceData.fJname, rightcol2, startY);
+
+      doc.setFontType("bold");
+      doc.text("Job PO: ", rightcol1, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(invoiceData.fPo, rightcol2, startY);
+
+      doc.setFontType("bold");
+      doc.text("Address", rightcol1, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(invoiceData.fAddress, rightcol2, startY);
+
+      doc.setFontType("bold");
+      doc.text("City", rightcol1, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(invoiceData.fCity, rightcol2, startY);
+
+      doc.setFontType("bold");
+      doc.text("State", rightcol1, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text(invoiceData.fState + " " + invoiceData.fZip, rightcol2, startY);
+
+      doc.setTextColor("#114199");
+      doc.textWithLink("View job image", rightcol1, startY + 30, {
+        url: `${invoiceData.fImg}`,
+      });
+      doc.setTextColor("#0a0a0a");
+
+      // product infos @ table
+      var header = function (data) {
+        doc.setFontSize(8);
+        doc.setTextColor("#0a0a0a");
+        doc.setFontStyle("normal");
+      };
+
+      doc.setFontSize(8);
+      doc.setFontStyle("normal");
+      var options = {
+        beforePageContent: header,
+        margin: {
+          top: 50,
+        },
+        styles: {
+          overflow: "linebreak",
+          fontSize: 8,
+          rowHeight: "auto",
+          columnWidth: "wrap",
+        },
+        theme: "striped",
+        headStyles: { fillColor: "#991111" },
+        columnStyles: {
+          1: { columnWidth: "auto" },
+          2: { columnWidth: "auto" },
+          3: { columnWidth: "auto" },
+          4: { columnWidth: "auto" },
+          5: { columnWidth: "auto" },
+          6: { columnWidth: "auto" },
+        },
+        startY: (startY += 50),
+      };
+
+      var columns = [
+        { title: "ID", dataKey: "prodId", width: 90 },
+        { title: "Item", dataKey: "item", width: 40 },
+        { title: "Description", dataKey: "description", width: 40 },
+        { title: "Qty", dataKey: "qty", width: 40 },
+        { title: "Cost", dataKey: "subTotal", width: 40 },
+        { title: "Total", dataKey: "cost", width: 40 },
+      ];
+
+      doc.autoTable(columns, products, options);
+      //-------Invoice Footer---------------------
+      var rightcol1 = 340;
+      var rightcol2 = 430;
+
+      startY = doc.autoTableEndPosY() + 30;
+      doc.setFontSize(fontSizes.NormalFontSize);
+
+      doc.setFontType("bold");
+      doc.text("Total", rightcol1, (startY += lineSpacing.NormalSpacing));
+      doc.setFontType("normal");
+      doc.text("$" + invoiceData.cost + ".00", rightcol2 + 25, startY);
+
+      doc.setFontType("bold");
+      doc.text(
+        "For " + customer[0].name + ",",
+        rightcol2 - 10,
+        (startY += lineSpacing.NormalSpacing + 25)
+      );
+      doc.text(
+        `Thank you ${company.name}!`,
+        rightcol2 - 10,
+        (startY += lineSpacing.NormalSpacing + 25)
+      );
+      doc.save(
+        `${invoiceData.from}_${invoiceData.invoiceId}_${customer[0].name.slice(
+          0,
+          5
+        )}_${invoiceData.fJname}_${invoiceData.fPo}.pdf`
+      );
+
+      console.log("output pdf");
+      console.log(
+        `${invoiceData.from}-${invoiceData.invoiceId}_${customer[0].name.slice(
+          0,
+          5
+        )}_${invoiceData.fPo}.pdf`
+      );
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Expense record - BM</title>
+
+      <link rel="icon" type="image/x-icon" href="favico.ico">
+      <link rel="stylesheet" href="https://office.boxcar.site/public/css/fonts.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+      <link rel="stylesheet" href="public/css/style.css">
+
+</head>
+  <body class="bg-light">
+
+
+    <div id="start"></div>
+    <div id="display"></div>
+    <div id="end"></div>
+
+
+
+    <script src="public/js/main.js"></script>
+    <script src="public/js/expenses/addExpenseRecord.js"></script>
+    <script src="public/js/utility.js"></script>
+    <script>
+      let expenseUrl = `${pre}/expense`;
+      let catUrl = `${pre}/category`
+      let invoiceUrl = `${pre}/invoices`;
+      let invRecords = [];
+      let totalRev = {
+        'revenue' : 0,
+        'quantity' : 0
+      };
+      $.get(invoiceUrl, function(data){
+        data.forEach(d => {
+          totalRev.revenue = totalRev.revenue + Number(d.cost);
+          totalRev.quantity = totalRev.quantity + 1;
+          invRecords.push(d)
+
+        })
+        document.getElementById('end').innerHTML += invoicesHTML(data)
+        let startHtml = `
+
+            <style>
+              .alert{
+                background-color: rgb(237, 247, 245);
+                border: 1px solid rgb(124, 120, 120);
+                border-radius:0;
+                box-shadow: 1px 1px 4px gray;
+              }
+            </style>
+            <div class="mx-auto" style="max-width:690px;">
+              <a href="/index.html" >Home</a>
+              <a href="/edit-expense.html" >Edit</a>
+
+              
+            </div>
+            <div class="alert alert-secondary py-2 mx-auto" style="max-width:690px;">
+              <h5>Total revenue $<span id="revenue">${totalRev.revenue}</span>.00</h5>
+              <h5>Total Jobs ${totalRev.quantity} </h5>
+            </div>
+      `;
+
+      document.getElementById('start').innerHTML += startHtml;
+
+   
+      })
+
+
+
+      let totalAllExpense = 0
+      $.get(catUrl, function(data){
+        let categoyTotals = (data[data.length-1])
+        let catResult = `<div class="alert alert-secondary py-2 mx-auto"  style="max-width:690px;"> <h4 class="col-12">Categories</h4></div>`
+        catResult += `
+            <div class="container-sm mx-auto" style="max-width:690px;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col" class="text-end">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
+        let htmlSegemnt = ``;
+        
+        categoyTotals.forEach(i => {
+         
+          if (i.category && i.amount != 0){
+
+              totalAllExpense = totalAllExpense + i.amount
+              // console.log(i.amount)
+              htmlSegemnt += `
+                      <tr>
+                        <th scope="row"><span class="badge bg-dark" style="width:30px;">${i.id}</span></th>
+                        <td>${i.category}</td>
+                        <td>${i.quantity}</td>
+                        <td class="text-end">${i.amount.toFixed(2)}</td>
+                      </tr>
+            `;
+          }
+        })
+        catResult += htmlSegemnt;
+        catResult += `  
+                    </tbody>
+            </table>`;
+        catResult += `<h4 class="text-end text-black border-bottom border-dark border-3">Expense Total: $<span id="expenseAll">${totalAllExpense.toFixed(2)}</span></h4>`;
+
+       
+        
+        let htmlSegment2 = `<div class="alert alert-secondary py-2 mx-auto" style="max-width:690px;"> <h4 class="col-12">Sub Category</h4></div>`
+        htmlSegment2 += `
+            <div class="container-sm mx-auto" style="max-width:690px;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Category</th>
+                      <th scope="col">Type</th>
+                      <th scope="col" class="text-end">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
+       
+        for (let m = 0; m < data.length-1; m++){
+
+            if (data[m].catId>=0 && data[m].amount != 0){
+              htmlSegment2 += `
+                          <tr>
+                            <th scope="row">${data[m].catId} - ${data[m].catName}</th>
+                            <td>${data[m].expense}</td>
+                            <td class="text-end">${data[m].amount.toFixed(2)}</td>
+                          </tr>
+                        `;
+            }
+        }
+        htmlSegment2 += `  
+                            </tbody>
+                    </table>`;
+        document.getElementById('display').innerHTML += catResult;
+        document.getElementById('display').innerHTML += htmlSegment2;
+
+        let itemized = `<div class="alert alert-secondary mx-auto" style="max-width:690px;"> <h4 class="col-12">Itemized</h4></div>`;
+        itemized += `
+            <div class="container-sm mx-auto" style="max-width:690px;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="small">Date</th>
+                      <th scope="col" class="small">Category</th>
+                      <th scope="col" class="small">Type</th>
+                      <th scope="col" class="text-end small">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
+        $.get(expenseUrl, function(data2){   
+            data2.forEach(v => {
+              itemized += `
+                <tr>
+                  <th scope="row" class="small">${v.date.slice(0,10)}</th>
+                  <th scope="row" class="small">${v.payee}</th>
+                  <td class="small">${v.type}</td>
+                  <td class="text-end small">${v.amount.toFixed(2)}</td>
+                </tr>`;              
+            })
+            itemized += `  
+                    </tbody>
+            </table>`;
+            document.getElementById('display').innerHTML += itemized
+
+        })
+      })
+      function invoicesHTML(invRecords){
+      let invTotalAmount = 0;
+      let invhtml = `<div class="alert alert-secondary mx-auto" style="max-width:690px;"> <h4 class="col-12">Invoices</h4></div>`;
+      invhtml += `
+            <div class="container-sm mx-auto" style="max-width:690px;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="small">Date</th>
+                      <th scope="col" class="small">Jobname</th>
+                      <th scope="col" class="small">Status</th>
+                      <th scope="col" class="text-end small">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
+      invRecords.forEach(inv => {
+        invTotalAmount = invTotalAmount + inv.cost
+        invhtml += `
+                <tr >
+                  <th scope="row" class="small">${editDate(inv.fDate)}</th>
+                  <th scope="row" class="small">${inv.fJname.slice(0,12)}</th>
+                  <td class="small">${inv.status}</td>
+                  <td class="text-end small">${inv.cost}</td>
+                </tr>
+        `
+      })
+      invhtml += `  
+                    </tbody>
+            </table>`;
+      invhtml +=  `
+        <div class="alert alert-secondary mx-auto" style="max-width:690px;">
+            <div class="row"> 
+              <div class="col-8 text-end"><h5 class="col-12 text-end">Gross </h5></div>
+              <div class="col-4"><h5>$${invTotalAmount}.00</h5></div>
+
+              <div class="col-8 text-end"><h5 class="col-12 text-end">Expense </h5></div>
+              <div class="col-4"><h5>$${totalAllExpense.toFixed(2)}</h5></div>
+
+              <div class="col-8 text-end"><h5 class="col-12 text-end">Adjusted </h5></div>
+              <div class="col-4"><h5> <span id="adjustedFinal">$${(invTotalAmount - totalAllExpense.toFixed(2)).toFixed(2)}<span> </h5></div>
+            </div>
+
+        </div>`;
+
+      return invhtml
+      }
+
+     
+    </script>
+
+
+  </body>
+</html>
+
+
+

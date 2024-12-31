@@ -17,6 +17,8 @@ function addNewCustomer() {
             let response = this.response;
             if (response) {
                 alert('Added customer')
+                fetchCustomersDb()
+                fetchCustomerList();
             };
         
         }

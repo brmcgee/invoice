@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exp BM</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+
+</head>
+<body>
+
+    <div class="p-1 alert alert-secondary rounded-0">
+      <h4>BM Expense
+        <span class="float-end fs-6"><a href="/index.html">Home</a></span>
+      </h4>
+      
+    </div>
+    <div class="bg-light m-0 p-0" style="height: 96vh;">
+      <div id="expRoot"></div>
+    </div>
+
+
+
+
+
+    <!-- Modal add expense image -->
+<div class="modal fade" id="addExpenseImage" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addExpenseImageLabel">Add image</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="addExpenseImageBody" class="modal-body">
+          
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal  expense image -->
+<div class="modal fade" id="expenseImage" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="expenseImageLabel">Expense Image</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="expenseImageBody" class="modal-body">
+        
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+
+<script src="public/js/utility.js"></script>
+<script src="public/js/main.js"></script>
+<script>
+    function initDataTable() {
+            $('#myTable').DataTable({
+                paging: true,
+                scrollY: 400,
+                ordering: true,
+                searching: true
+            });
+        } 
+
+    let expRoot = document.getElementById('expRoot');
+    let url = `${pre}/expense`
+
+    $.get(url, function(data){
+        let html = ``;
+        html += htmlExpenseTable(data)
+        $('#expRoot').html(html)
+        initDataTable()
+    })
+
+    function htmlExpenseTable(data){
+        let html = `
+        
+      <div class="container-fluid" style="max-width:1200px;">
+        <table class="table table-striped" id="myTable">
+          <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Payee</th>
+            <th scope="col">Img</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Cat</th>
+            <th scope="col">Type</th>
+             <th scope="col">Date</th>
+            <th scope="col">Desc</th>
+            <th scope="col">Payment</th>
+            </tr>
+          </thead>
+        <tbody>
+    `;
+   
+    data.forEach(d => {
+
+    html += `
+    <tr>
+      <th scope="row">${d.expenseId}</th>
+      <td>${d.payee}</td>
+      <td>
+       
+          
+          ${d.img == '' 
+            ? `<button class="btn btn-sm btn-transparent m-0 p-0" onclick="addExpenseImage(${d.expenseId})" data-bs-toggle="modal" data-bs-target="#addExpenseImage">
+                <img src="public/assets/icons/add-black.png" alt="add" width="30" id="rowImg${d.expenseId}">
+                </button>` 
+            : `<button class="btn btn-sm btn-transparent m-0 p-0" onclick="showExpenseImageModal(${d.expenseId})" data-bs-toggle="modal" data-bs-target="#expenseImage">
+                <img src="public/assets/icons/visibility-black.png" name="${d.img}" alt="add" width="23" id="rowImg${d.expenseId}">
+              </button>
+              <button class="btn btn-sm btn-transparent m-0 p-0" onclick="addExpenseImage(${d.expenseId})" data-bs-toggle="modal" data-bs-target="#addExpenseImage">
+                <img src="public/assets/icons/add-black.png" alt="add" width="18" id="rowImg${d.expenseId}">
+              </button>
+            `}
+            
+        </button>
+      </td>
+      
+      <td>${d.amount.toFixed(2)}</td>
+      <td>${d.category}</td>
+      <td><small>${d.type}</small></td>
+      <td><small>${editDate(d.date)}</small></td>
+      <td>${d.description}</td>
+      <td>${d.payment}</td>
+    </tr>    
+    
+    `
+
+    })
+
+    html += `
+        </tbody>
+      </table>  
+    </div> 
+    `;
+        return html;
+    }
+
+
+    function showExpenseImageModal(id){
+      let img = document.getElementById(`rowImg${id}`).name;
+      let modalBody = document.getElementById('expenseImageBody')
+
+      let html = `
+      <div class="container-fluid">
+        <img src='${img}' class="img-fluid" style="width:100%;">
+      </div>
+      `
+      modalBody.innerHTML = html;
+    }
+
+    function addExpenseImage(id){
+       let modalBody = document.getElementById('addExpenseImageBody');
+       
+       let html = `
+
+       <form ref='uploadFormImg' 
+            id='addExpenseImageForm' 
+            action='${pre}/expense-image-add' 
+            method='POST' 
+            encType="multipart/form-data">
+
+              <input type="file" name="sampleFile" class="form-control" id="fileToUpload"/>
+
+              <input type="text" hidden name="keyValue" value="img" class="fImg form-control" id="keyValue"/>
+
+              <div class="mt-2">
+              <input type="text" name="expenseId" value="${id}" class="form-control" id="expenseId"/>
+              </div>
+              <div class="modal-footer">
+                                          
+              <button onclick="handleAddExpenseImage(event, ${id})" 
+                    type='button' value='Upload!' data-bs-dismiss="modal" class="btn btn-primary ">Upload</button>
+                                          
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div> 
+                                    
+         </form>   
+       `
+
+       modalBody.innerHTML = html;
+    }
+
+
+    function handleAddExpenseImage(e){
+      e.preventDefault(); 
+      var data = new FormData(document.getElementById('addExpenseImageForm'));
+      let url = `${pre}/expense-image-add`
+
+      var xmlhttp = new XMLHttpRequest();
+      // document.getElementById('imgUploadLoader').innerHTML = 'loading now'
+      xmlhttp.onreadystatechange = function() {
+
+              if (this.readyState == 4 && this.status == 200) {
+                
+                  let response = this.response;
+                  let respond = JSON.parse(response);
+                  console.log(respond)
+
+                  document.getElementById(`rowImg${respond.expenseId}`).src = respond.url;
+                  document.getElementById(`addExpenseImageBody`).innerHTML = '';
+
+                  // document.getElementById('imgUploadLoader').innerHTML = '';
+              
+              }
+        };
+        
+        xmlhttp.open("POST", url, true);
+        xmlhttp.send(data);
+
+
+    }
+    </script>
+
+
+</body>
+</html>
