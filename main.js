@@ -66,8 +66,8 @@ class InvoiceApp {
 }
 
 app = new InvoiceApp();
-mydata.createInvoice(inv1)   // create new invoice method via Invoice class
 mydata = app.loadInvoices();
+// mydata.createInvoice(inv4)   // create new invoice method via Invoice class
 
 async function toggleSidebarContent(option, invoiceId){ 
   if (option == 'new'){
