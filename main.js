@@ -67,7 +67,8 @@ class InvoiceApp {
 
 app = new InvoiceApp();
 mydata = app.loadInvoices();
-// mydata.createInvoice(inv4)   // create new invoice method via Invoice class
+// app.createInvoice(Invoice)   // create new invoice parameter invoice class
+// app.deleteInvoice(invoiceId)   // create new invoice parameter string of invoiceId
 
 async function toggleSidebarContent(option, invoiceId){ 
   if (option == 'new'){
