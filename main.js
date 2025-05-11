@@ -57,10 +57,16 @@ class InvoiceApp {
     createInvoice(invoice){
         this.invoices.push(invoice)
         this.saveInvoices()
+
+        invoiceContainer ? invoiceContainer.innerHTML += invoiceCardTemplate(invoice) : ''
+        invoiceTotalCountElem ? invoiceTotalCountElem.innerHTML = app.getAllInvoices().length : ''
     }
     deleteInvoice(invoiceId){
         this.invoices = this.invoices.filter(inv => inv.invoiceId !== invoiceId)
         this.saveInvoices();
+
+        document.getElementById(`inv${invoiceId}`) && document.getElementById(`inv${invoiceId}`).remove()
+        invoiceTotalCountElem ? invoiceTotalCountElem.innerHTML = app.getAllInvoices().length : ''
     }
     editInvoice(id, updatedData) {
         const index = this.invoices.findIndex(invoice => invoice.invoiceId == id);
@@ -501,7 +507,7 @@ function sidecardTemplateForInvoice(data){
 
                                             ${isEmailed != null 
                                                 ? ` <small class="text-primary">Sent email on ${isEmailed.slice(0,25)} </small>`
-                                                : ` <small>Saved ${editDate(fDate)} </small>`}
+                                                : ` <small>Saved ${editDate2(fDate)} </small>`}
 
                                             <br>
                                             
@@ -569,8 +575,6 @@ function sidecardTemplateForInvoice(data){
 
 
 
-
-
 function actionBTN(invoice){
     return `
           <button class="invoice-action-btn my-2 me-1" onclick="alert('Handle all actions for ${invoice.fJname}')">
@@ -591,7 +595,7 @@ function invoiceCardTemplate(obj){
             onclick="toggleSidebarContent('inv', ${obj.invoiceId})"
         >
       <div class="invoice-info">
-        <div class="invoice-id">#<span id="invoiceId">RBH07${obj.invoiceId}</span></div>
+        <div class="invoice-id">#<span id="invoiceId">${obj.invoiceId}</span></div>
         <div class="invoice-due">${obj.fDate}</div>
         <div class="invoice-total">$ <span>${obj.cost}</span></div>
         
@@ -619,9 +623,6 @@ function invoiceCardTemplate(obj){
   `
   return html;
 }
-
-
-
 
 function renderInvoices(invoices){
     
@@ -705,7 +706,7 @@ function newInvoiceHTML(){
                      </div>
                      <div class="col-xs-12 col-sm-4">
                          <label for="jobdate" class="form-label">Date</label>
-                         <input type="text" placeholder="date" id="jobdate" name="jobdate"class="form-control">
+                         <input type="date" placeholder="date" id="jobdate" name="jobdate"class="form-control">
                      </div>
                  </div>
                  <div class="row">
@@ -734,7 +735,7 @@ function newInvoiceHTML(){
                  </div>
  
                  
-                 <div class="row">
+                 <div class="row d-none">
                      <div class="col-xs-12">
                          <label for="isEmailed" class="form-label">Saved/Email</label>
                          <input type="text" placeholder="isEmailed" id="isEmailed" name="isEmailed" class="form-control">
@@ -750,7 +751,7 @@ function newInvoiceHTML(){
              <div class="py-1 bg-dark-subtle p-1 mt-2">
                  <h5 class="">Line Items 
                      <span>
-                         <button onclick="addLineItem()" type="button" class="btn btn-sm btn-transparent float-end">
+                         <button onclick="addLineItem()" type="button" class="btn btn-sm btn-light rounded-circle float-end">
                              <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#0e1ce1"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21H7C4.79086 21 3 19.2091 3 17V7Z" stroke="#2907d5" stroke-width="2"></path> <path d="M16.2739 11.1377C16.6644 10.7472 16.6644 10.114 16.2739 9.7235L14.4823 7.9319C14.0918 7.54137 13.4586 7.54138 13.0681 7.9319L8.96106 12.0389L8.34768 15.7477C8.3365 15.8154 8.39516 15.874 8.4628 15.8627L12.1669 15.2448L16.2739 11.1377Z" stroke="#2907d5" stroke-width="2"></path> </g></svg>
                          </button>
                      </span>
@@ -768,15 +769,8 @@ function newInvoiceHTML(){
                          <th scope="col" >Total</th>
                      </tr>
                      </thead>
-                     <tbody id="tableBody">
-                     <tr>
-                         <th scope="row">1</th>
-                         <td contenteditable="true"></td>
-                         <td contenteditable="true"></td>
-                         <td contenteditable="true"></td>
-                         <td contenteditable="true"></td>
-                         <td contenteditable="true"></td>
-                     </tr>
+                     <tbody id="tableBody" class="bg-light text-dark">
+
                      </tbody>
              </table>
  
@@ -804,8 +798,6 @@ function newInvoiceHTML(){
      `;
      return bodyHTML;
 }
-
-
 
 
 let count_filter = 0;
@@ -876,6 +868,7 @@ function confirmDeleteInvoiceRecord(id) {
     if (confirm(deleteText)){
 
         app.deleteInvoice(id)
+        // document.getElementById(`inv${id}`).remove()
         
     } else {
         alert('close call we shall not delete!')
@@ -910,8 +903,8 @@ function addLineItem(){
                 </th>
                 <td contenteditable="true" class="item" id="item${productCount}"></td>
                 <td contenteditable="true" class="description" id="description${productCount}"></td>
-                <td contenteditable="true" class="qty" id="qty${productCount}" onkeyup="getRowTotal(${productCount})">0</td>
-                <td contenteditable="true" class="cost" id="cost${productCount}" onkeyup="getRowTotal(${productCount})">0</td>
+                <td contenteditable="true" class="qty" id="qty${productCount}" onkeyup="getRowTotal(${productCount})"></td>
+                <td contenteditable="true" class="cost" id="cost${productCount}" onkeyup="getRowTotal(${productCount})"></td>
                 <td contenteditable="false" class="total" id="total${productCount}">0</td>
             </tr>
             `
@@ -985,9 +978,9 @@ function makeInvoiceObjectFromForm(){
             'vEmail' : vemail.value,
             'fProducts' : JSON.stringify(products),
             'cost' : totalCost,
-            'timePaid' : timePaid.value,
-            'isEmailed' : isEmailed.value,
-            'status' : timePaid.value == "false" ? 'unpaid' : "paid",
+            'timePaid' : 'false',
+            'isEmailed' : null,
+            'status' : 'unpaid',
             'isHide' : 'false',
             'cost' : Number(cost.innerHTML),
             'fImg' : '/invoice-uploads/placeholder.jpg'
