@@ -30,11 +30,11 @@ class Invoice {
     }
 }
 
-const inv1 = new Invoice ( "340","2","Yogi Beara","1997 Gulf TO Bay Blvd","Boston","PA","19963","XYZ9963","2025-01-01","[{\"id\":\"28\",\"name\":\"Lusha Vegas\",\"address\":\"356 Muscle St\",\"city\":\"Hannastown, PA 15635\",\"phone\":\"724-366-4377\"}]","[{\"prodId\":8,\"item\":\"Rent Payment&nbsp;\",\"description\":\"356 Musick St - rental month Jan25<br>\",\"qty\":1,\"price\":800,\"cost\":800}]","https:\/\/www.bm-app.org\/invoice-uploads\/20240811_134224.jpg","28","800.00","paid","brianmcee@gmail.com","true","Mon Feb 24 2025 09:41","#51 INV-381- Pd Check 1\/1 bm 1\/1\/2025" )
+const inv1 = new Invoice ( "340","2","Yogi Beara","1997 Gulf TO Bay Blvd","Boston","PA","19963","XYZ9963","2025-01-01","[{\"id\":\"28\",\"name\":\"Lusha Vegas\",\"address\":\"356 Muscle St\",\"city\":\"Hannastown, PA 15635\",\"phone\":\"724-366-4377\"}]","[{\"prodId\":8,\"item\":\"Rent Payment&nbsp;\",\"description\":\"356 Musick St - rental month Jan25<br>\",\"qty\":1,\"price\":800,\"cost\":800, }]","https:\/\/www.bm-app.org\/invoice-uploads\/20240811_134224.jpg","28","800.00","paid","brianmcee@gmail.com","true","Mon Feb 24 2025 09:41","#51 INV-381- Pd Check 1\/1 bm 1\/1\/2025" )
 const inv2 = new Invoice ( "399","2","Bill Sager","1706 Chelton Avenue","Brookline","PA","15226\n","C14018","2025-03-05","[{\"id\":21,\"name\":\"Tri City Doors\",\"address\":\"4655 E Pitts McKees Blvd\",\"city\":\"North Versailles, PA 15137\",\"phone\":\"412-679-2929\"}]","[{\"prodId\":9,\"item\":\"Hourly labor\",\"description\":\"2 8x7.5, jambs, opener, Hourly labor charge\",\"qty\":\"12.5\",\"cost\":\"562.5\"}]","\/invoice-uploads\/20250305_114927.jpg","21","562.50","paid","slackdoor@comcast.net","false","Mon Mar 10 2025 11:07:08 GMT+0000","#61 INV-398-399-400- Johnson-Pd check  4588 3\/14\/2025")
 const inv3 = new Invoice ( "311","2","Frank Mustard","1988 Smithon St","Pittsburgh","PA","15226\n","XC6631","2025-03-15","[{\"id\":22,\"name\":\"West Coast Doors\",\"address\":\"4655 E Pitts McKees Blvd\",\"city\":\"North Versailles, PA 15137\",\"phone\":\"412-679-2929\"}]","[{\"prodId\":9,\"item\":\"Hourly labor\",\"description\":\"2 8x7.5, jambs, opener, Hourly labor charge\",\"qty\":\"12.5\",\"cost\":\"562.5\"}]","\/invoice-uploads\/20250305_114927.jpg","21","562.50","paid","headdoor@comcast.net","false","Mon Mar 10 2025 11:07:08 GMT+0000","false")
 const inv4 = new Invoice ( "380","2","Biff MacGyver","333 Cemetery Rd","Westin","PA","19963","FC63369","2025-01-01","[{\"id\":\"28\",\"name\":\"Lusha Vegas\",\"address\":\"356 Muscle St\",\"city\":\"Hannastown, PA 15635\",\"phone\":\"724-366-4377\"}]","[{\"prodId\":8,\"item\":\"Rent Payment&nbsp;\",\"description\":\"356 Musick St - rental month Jan25<br>\",\"qty\":1,\"price\":800,\"cost\":800}]","https:\/\/www.bm-app.org\/invoice-uploads\/20240811_134224.jpg","28","540.00","unpaid","briamcgee@gmail.com","true",null )
-const inv5 = new Invoice ( "355","2","Leigh Manuel","565 West Hanover Rd","Westin","PA","19963","FC63369","2025-01-01","[{\"id\":\"28\",\"name\":\"Lusha Vegas\",\"address\":\"356 Muscle St\",\"city\":\"Hannastown, PA 15635\",\"phone\":\"724-366-4377\"}]","[{\"prodId\":8,\"item\":\"Rent Payment&nbsp;\",\"description\":\"356 Musick St - rental month Jan25<br>\",\"qty\":1,\"price\":800,\"cost\":800}]","https:\/\/www.bm-app.org\/invoice-uploads\/20240811_134224.jpg","28","840.00","unpaid","brianmgee@gmail.com","true",null )
+const inv5 = new Invoice ( "355","2","Leigh Manuel","565 West Hanover Rd","Westin","PA","19963","FC63369","2025-01-01","[{\"id\":\"28\",\"name\":\"Lusha Vegas\",\"address\":\"356 Muscle St\",\"city\":\"Hannastown, PA 15635\",\"phone\":\"724-366-4377\"}]","[{\"prodId\":8,\"item\":\"Rent Payment&nbsp;\",\"description\":\"356 Musick St - rental month Jan25<br>\",\"qty\":1,\"price\":800,\"cost\":800,\"prodId\":8,\"item\":\"Rent Payment&nbsp;\",\"description\":\"356 Musick St - rental month Jan25<br>\",\"qty\":1,\"price\":800,\"cost\":800}]","https:\/\/www.bm-app.org\/invoice-uploads\/20240811_134224.jpg","28","840.00","unpaid","brianmgee@gmail.com","true",null )
 
 
 
@@ -48,8 +48,8 @@ class InvoiceApp {
         const invoices = localStorage.getItem('invoices');
         return invoices ? JSON.parse(invoices) : [];
     }
-    loadInvoiceId(invoiceId) {      
-        return this.invoices.filter(inv => inv.invoiceId == invoiceId);
+    loadInvoiceId(id) {     
+        return this.invoices.filter(inv => inv.invoiceId === id);
     }
     saveInvoices(){
         localStorage.setItem('invoices', JSON.stringify(this.invoices))
@@ -61,6 +61,48 @@ class InvoiceApp {
     deleteInvoice(invoiceId){
         this.invoices = this.invoices.filter(inv => inv.invoiceId !== invoiceId)
         this.saveInvoices();
+    }
+    editInvoice(id, updatedData) {
+        const index = this.invoices.findIndex(invoice => invoice.invoiceId == id);
+        if (index !== -1) {
+            this.invoices[index] = { ...this.invoices[index], ...updatedData };
+            this.saveInvoices();
+        }
+    }
+    updateInvoice(id, updatedData) {
+        this.editInvoice(id, updatedData);
+    }
+
+    getAllInvoices(){
+        return this.invoices;
+    }
+    getInvoiceIdTotal(id) {     
+        let invoice = this.invoices.filter(inv => inv.invoiceId === id);
+        let sum = 0;
+        JSON.parse(invoice[0].fProducts).forEach(prod => { sum = sum + Number(prod.cost) })
+        return sum;
+    }
+    getInvoiceThumbnail(id){
+        let invoice = this.invoices.filter(inv => inv.invoiceId === id);    
+        let img = invoice[0].fImg.split('/')[invoice[0].fImg.split('/').length-1]
+        let thumb = 'https://www.bm-app.org/invoice-uploads/' + `thumbnail/th_${img}`
+        return thumb;
+    }
+    getInvoiceDataURL(id){
+        let url = this.getInvoiceThumbnail(id);
+        var xmlHTTP = new XMLHttpRequest();
+
+        xmlHTTP.open('GET', url, true);
+        xmlHTTP.responseType = 'arraybuffer';
+        xmlHTTP.onload = function(e) {
+          var arr = new Uint8Array(this.response);
+          var raw = String.fromCharCode.apply(null,arr);
+          var b64 = btoa(raw);
+          var dataURL="data:image/png;base64," + b64;
+            console.log(dataURL)
+        };
+        xmlHTTP.send();
+        
     }
 
 }
@@ -496,6 +538,7 @@ function sidecardTemplateForInvoice(data){
                                 <a href="javascript:window.print()" class="btn btn-dark"><i class="ri-printer-line"></i> 
                                 <svg width="25"viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V11C20.6569 11 22 12.3431 22 14V18C22 19.6569 20.6569 21 19 21H5C3.34314 21 2 19.6569 2 18V14C2 12.3431 3.34315 11 5 11V5ZM5 13C4.44772 13 4 13.4477 4 14V18C4 18.5523 4.44772 19 5 19H19C19.5523 19 20 18.5523 20 18V14C20 13.4477 19.5523 13 19 13V15C19 15.5523 18.5523 16 18 16H6C5.44772 16 5 15.5523 5 15V13ZM7 6V12V14H17V12V6H7ZM9 9C9 8.44772 9.44772 8 10 8H14C14.5523 8 15 8.44772 15 9C15 9.55228 14.5523 10 14 10H10C9.44772 10 9 9.55228 9 9ZM9 12C9 11.4477 9.44772 11 10 11H14C14.5523 11 15 11.4477 15 12C15 12.5523 14.5523 13 14 13H10C9.44772 13 9 12.5523 9 12Z" fill="#ffffff"></path> </g></svg>
                                 Print</a>
+        <button id="offcanvasCloseBtn" type="button" class="btn-discard my-2 ms-1" onclick="confirmDeleteInvoiceRecord(${invoiceId})" data-bs-dismiss="offcanvas" aria-label="Close">Discard</button>
 
 
          
@@ -607,11 +650,12 @@ function newInvoiceHTML(){
      <button type="button" onclick="updateInvoiceRecord(this)" class="btn btn-warning rounded-2 d-none">Save</button>
      <input type="number" value="380" onchange="getInvoiceObjectToForm(this.value)" min="380" class="d-none float-end form-control" style="width: 7rem;">
      <div id="note"></div>
+     <span class="float-end">${backBTN()}</span>
      
      <div class="inv-container container-md p-3 bg-wrapper mt-1 rounded-2 shadow" style="max-width: 775px;">
  
          <h5 class="py-1 bg-dark-subtle p-1">Vendor 
-             <span class="float-end fw-bold fs-4 pe-3 ">ID: <span id="invoiceId" class="float-end fw-bold fs-4 pe-3 "></span></span>
+             <span class="float-end fw-bold fs-4 pe-3 ">ID: <span id="invoiceId" class="float-end fw-bold fs-4 pe-3 ">${app.getAllInvoices().length+1}</span></span>
          </h5>
          <input type="text" name="userId" id="userId" value="user" class="d-none">
          
@@ -744,9 +788,9 @@ function newInvoiceHTML(){
              </button>
  
              <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" onclick="fetchAllInvoices()">Close</button>
+                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="offcanvas">Close</button>
                  <button class="btn btn-sm btn-danger d-none" onclick="document.getElementById('addExpenseForm').reset()" type="button">Clear</button>
-                 <button onclick="updateInvoiceRecord(event)" class="btn btn-success btn-sm" type="button">Save</button>
+                 <button onclick="updateInvoiceRecord(event)" class="btn btn-success btn-sm" type="button" data-bs-dismiss="offcanvas">Save</button>
              </div>
  
          </form>
@@ -817,6 +861,219 @@ function filterStatus(id){
 
 }
 
+
+
+
+let productCount = 0;
+// let user_id = 9;
+
+function confirmDeleteInvoiceRecord(id) {
+
+  
+
+    
+    let deleteText = `Are you sure to delete invoice, once deleted this can not be undone!`
+    if (confirm(deleteText)){
+
+        app.deleteInvoice(id)
+        
+    } else {
+        alert('close call we shall not delete!')
+    }
+
+
+
+}
+function getRowTotal(id){
+    let totalCost = 0;
+    let qty = Number(document.getElementById(`qty${id}`).innerHTML) ? Number(document.getElementById(`qty${id}`).innerHTML) : 0
+    let cost = Number(document.getElementById(`cost${id}`).innerHTML) ? Number(document.getElementById(`cost${id}`).innerHTML) : 0
+    let total = qty * cost
+    document.getElementById(`total${id}`).innerHTML = total
+
+    let costElem = document.getElementById('cost')
+    let totals = document.querySelectorAll('.total');
+    totals.forEach(t => {
+        totalCost = totalCost + Number(t.innerHTML)
+    })
+    costElem.innerHTML = totalCost
+}
+function addLineItem(){
+    
+    let html = `  
+            <p class="d-none" id='prodId${productCount}'>${productCount}</p>
+            <tr id="lineItem${productCount}" name="x"  >
+                <th scope="row" class="prodId">
+                    <button id="${productCount}" onclick="deleteRow('lineItem${productCount}')" class="btn btn-sm btn-transparent">
+                        <svg width="25px" height="25px" xmlns="http://www.w3.org/2000/svg" fill="#d10000" width="64px" height="64px" viewBox="0 0 24 24" stroke="#d10000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"></path></g></svg>
+                    </button>  
+                </th>
+                <td contenteditable="true" class="item" id="item${productCount}"></td>
+                <td contenteditable="true" class="description" id="description${productCount}"></td>
+                <td contenteditable="true" class="qty" id="qty${productCount}" onkeyup="getRowTotal(${productCount})">0</td>
+                <td contenteditable="true" class="cost" id="cost${productCount}" onkeyup="getRowTotal(${productCount})">0</td>
+                <td contenteditable="false" class="total" id="total${productCount}">0</td>
+            </tr>
+            `
+    document.getElementById('tableBody').innerHTML += html
+}
+function deleteRow(target){
+    document.getElementById(target).remove()
+}
+function updateInvoiceRecord(e){
+
+    e.preventDefault;
+    let record = makeInvoiceObjectFromForm();
+
+   app.createInvoice(record)
+
+}
+function makeInvoiceObjectFromForm(){
+    let invId = document.getElementById('invoiceId')
+    let jobname = document.getElementById('jobname')
+    let jobdate = document.getElementById('jobdate')
+    let jobaddress = document.getElementById('jobaddress')
+    let jobcity = document.getElementById('jobcity')
+    let jobstate = document.getElementById('jobstate')
+    let jobzip = document.getElementById('jobzip')
+    let jobpo = document.getElementById('jobpo')
+    let vendor = document.getElementById('vendor')
+    let vaddress = document.getElementById('address')
+    let vcity = document.getElementById('city')
+    let vphone = document.getElementById('phone')
+    let vemail = document.getElementById('vemail')
+    let vendorId = document.getElementById('vendorId')
+    let tableBody = document.getElementById('tableBody')
+    let timePaid = document.getElementById('timePaid');
+    let isEmailed = document.getElementById('isEmailed');
+    let userId = document.getElementById('userId');
+    let cost = document.getElementById('cost');
+    
+
+    let products = [];
+    let totalCost = 0;
+
+    let items = document.querySelectorAll('.item');
+    let descriptions = document.querySelectorAll('.description')
+    let qtys = document.querySelectorAll('.qty')
+    let costs = document.querySelectorAll('.cost')
+    let totals = document.querySelectorAll('.total')
+        
+    for (let i = 0; i < items.length; i++){
+        let obj = { 
+            'prodId' : Number(document.getElementById(`prodId${i}`).innerHTML), 
+            'item': items[i].innerHTML, 'description' : descriptions[i].innerHTML, 
+            'qty' : Number(qtys[i].innerHTML), 
+            'price': Number(costs[i].innerHTML), 
+            'cost' : Number(totals[i].innerHTML) }
+        products.push(obj)
+        totalCost = totalCost + Number(totals[i].innerHTML)
+    }
+
+    let vendor_active = [{ 'id' : vendorId.value, 'name' : vendor.value, 'address' : vaddress.value, 'city' : vcity.value, 'phone' : vphone.value}]
+    let obj = {
+            'invoiceId' : app.getAllInvoices().length+1,
+            'userId' : Number(userId.value),
+            'fDate' : jobdate.value,
+            'fJname' : jobname.value,
+            'fAddress' : jobaddress.value,
+            'fCity' : jobcity.value,
+            'fState' : jobstate.value,
+            'fZip' : jobzip.value,
+            'fPo' : jobpo.value,
+            'fVendor' : JSON.stringify(vendor_active),
+            'vEmail' : vemail.value,
+            'fProducts' : JSON.stringify(products),
+            'cost' : totalCost,
+            'timePaid' : timePaid.value,
+            'isEmailed' : isEmailed.value,
+            'status' : timePaid.value == "false" ? 'unpaid' : "paid",
+            'isHide' : 'false',
+            'cost' : Number(cost.innerHTML),
+            'fImg' : '/invoice-uploads/placeholder.jpg'
+        }
+      
+        return obj
+}
+
+function getInvoiceObjectToForm(id){
+    let invId = document.getElementById('invoiceId')
+    let jobname = document.getElementById('jobname')
+    let jobdate = document.getElementById('jobdate')
+    let jobaddress = document.getElementById('jobaddress')
+    let jobcity = document.getElementById('jobcity')
+    let jobstate = document.getElementById('jobstate')
+    let jobzip = document.getElementById('jobzip')
+    let vendor = document.getElementById('vendor')
+    let vaddress = document.getElementById('address')
+    let vcity = document.getElementById('city')
+    let vphone = document.getElementById('phone')
+    let vemail = document.getElementById('vemail')
+    let tableBody = document.getElementById('tableBody')
+    let jobpo = document.getElementById('jobpo')
+    let vendorId = document.getElementById('vendorId')
+    let timePaid = document.getElementById('timePaid');
+    let isEmailed = document.getElementById('isEmailed');
+    let userId = document.getElementById('userId');
+    let deleteBtn = document.getElementById('deleteBtn');
+    let costElem = document.getElementById('cost')
+
+    function populateForm(data){
+       let inv = data[0]
+       deleteBtn.name = inv.invoiceId   
+       invId.innerHTML = inv.invoiceId
+       jobname.value = inv.fJname
+       jobdate.value = inv.fDate
+       jobaddress.value = inv.fAddress
+       jobcity.value = inv.fCity
+       jobstate.value = inv.fState
+       jobzip.value = inv.fZip
+       jobpo.value = inv.fPo
+       let customer = JSON.parse(inv.fVendor)
+       vendor.value = customer[0].name
+       vaddress.value = customer[0].address
+       vcity.value = customer[0].city
+       vendorId.value = customer[0].id
+       vemail.value = inv.vEmail
+       vphone.value = customer[0].phone
+       isEmailed.value = inv.isEmailed
+       timePaid.value = inv.timePaid
+       userId.value = inv.userId
+       costElem.innerHTML = `${inv.cost.toFixed(2)}` 
+
+
+       let products = JSON.parse(inv.fProducts)
+       let html = ``
+       productCount = 0;
+       products.forEach(product => {
+            html += `<p class="d-none" id='prodId${productCount}'>${product.prodId}</p>
+            <tr id="lineItem${productCount}" name="${product.prodId}">
+                <th scope="row" class="prodId">
+                    <button id="${productCount}" onclick="deleteRow('lineItem${productCount}')" class="btn btn-sm btn-transparent">
+                        <svg width="25px" height="25px" xmlns="http://www.w3.org/2000/svg" fill="#d10000" width="64px" height="64px" viewBox="0 0 24 24" stroke="#d10000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"></path></g></svg>
+                    </button>  
+                </th>
+                <td contenteditable="true" class="item" id="item${productCount}">${product.item}</td>
+                <td contenteditable="true" class="description" id="description${productCount}">${product.description}</td>
+                <td contenteditable="true" class="qty" id="qty${productCount}" onkeyup="getRowTotal(${productCount})">${product.qty}</td>
+                <td contenteditable="true" class="cost" id="cost${productCount}" onkeyup="getRowTotal(${productCount})">${Number(product.cost) / Number(product.qty)}</td>
+                <td contenteditable="false" class="total" id="total${productCount}">${product.cost}</td>
+            </tr>
+            `
+            productCount ++;
+       });
+       tableBody.innerHTML = html;
+       
+       
+    }
+   
+    $.get(`${pre}/invoices/${id}`, function(data){
+        
+        populateForm(data)
+        
+    })
+    
+}
 
 
 
